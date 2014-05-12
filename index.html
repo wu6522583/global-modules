@@ -5,11 +5,7 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="lib/sea/sea.js"></script>
-    <script>
-        seajs.config({
-            base: "../global-modules/"
-        });
-    </script>
+
     <style>
         a {
             cursor:pointer;
@@ -81,7 +77,11 @@
 
 </body>
 </html>
-
+<script>
+    seajs.config({
+        base: "../global-modules/"
+    });
+</script>
 <script>
 seajs.use("base/main",function(){
     define(function(require, exports, module){
@@ -90,30 +90,30 @@ seajs.use("base/main",function(){
 //            $("#aa").accordionList(json);
 //        });
 
-        require("Validform");
-        $(".registerform").Validform({
-		tiptype:2,
-		usePlugin:{
-			passwordstrength:{
-				minLen:6,//设置密码长度最小值，默认为0;
-				maxLen:18,//设置密码长度最大值，默认为30;
-				trigger:function(obj,error){
-					//该表单元素的keyup和blur事件会触发该函数的执行;
-					//obj:当前表单元素jquery对象;
-					//error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-					
-					//console.log(error);
-					if(error){
-						obj.parent().next().find(".Validform_checktip").show();
-						obj.parent().next().find(".passwordStrength").hide();
-					}else{
-						obj.parent().next().find(".Validform_checktip").hide();
-						obj.parent().next().find(".passwordStrength").show();	
-					}
-				}
-			}
-		}
-	});
+//        require("Validform");
+//        $(".registerform").Validform({
+//		tiptype:2,
+//		usePlugin:{
+//			passwordstrength:{
+//				minLen:6,//设置密码长度最小值，默认为0;
+//				maxLen:18,//设置密码长度最大值，默认为30;
+//				trigger:function(obj,error){
+//					//该表单元素的keyup和blur事件会触发该函数的执行;
+//					//obj:当前表单元素jquery对象;
+//					//error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
+//
+//					//console.log(error);
+//					if(error){
+//						obj.parent().next().find(".Validform_checktip").show();
+//						obj.parent().next().find(".passwordStrength").hide();
+//					}else{
+//						obj.parent().next().find(".Validform_checktip").hide();
+//						obj.parent().next().find(".passwordStrength").show();
+//					}
+//				}
+//			}
+//		}
+//	});
         
 //        require.async(["validateform"] , function () {
 //            $(".registerform").validateform({data:[
