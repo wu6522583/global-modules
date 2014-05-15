@@ -14,168 +14,77 @@
     </style>
 </head>
 <body>
-<form class="registerform" action="ajax_post.php"></form>
-<div id="aa" class="easyui-accordion" style="width:300px;height:200px;">
-    <div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
-        <h3 style="color:#0099FF;">Accordion for jQuery</h3>
-        <p>Accordion is a part of easyui framework for jQuery.
-            It lets you define your accordion component on web page more easily.</p>
-    </div>
-    <div title="Title2" data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">
-        content2
-    </div>
-    <div title="Title3">
-        content3
-    </div>
-</div>
-<ul id="dtree" ></ul>
+<!--<form class="registerform" action="ajax_post.php"></form>-->
+<!--<div id="aa" class="easyui-accordion" style="width:300px;height:200px;">-->
+    <!--<div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">-->
+        <!--<h3 style="color:#0099FF;">Accordion for jQuery</h3>-->
+        <!--<p>Accordion is a part of easyui framework for jQuery.-->
+            <!--It lets you define your accordion component on web page more easily.</p>-->
+    <!--</div>-->
+    <!--<div title="Title2" data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">-->
+        <!--content2-->
+    <!--</div>-->
+    <!--<div title="Title3">-->
+        <!--content3-->
+    <!--</div>-->
+<!--</div>-->
+<!--<ul id="dtree" ></ul>-->
 
 
-<div class="main">
-    <div class="wraper">
-        <p class="tr"><a href="demo.html" class="blue ml10 fz12">返回示例首页&raquo;</a></p>
-        
-    	<h2 class="green">在符合验证要求时才有密码强度提示</h2>
-        
-        <form class="registerform" action="demo/ajax_post.php" method="post">
-            <table width="100%" style="table-layout:fixed;">
-                <tr>
-                    <td class="need" style="width:10px;">*</td>
-                    <td style="width:70px;">密码：</td>
-                    <td style="width:210px;">
-                        <input type="password" value="" name="password" class="inputxt" plugin="passwordStrength"  datatype="*6-18" errormsg="密码至少6个字符,最多18个字符！" />
-                    </td>
-                    <td>
-                        <div class="Validform_checktip">密码至少6个字符,最多18个字符！</div>
-                        <div class="passwordStrength" style="display:none;"><b>密码强度：</b> <span>弱</span><span>中</span><span class="last">强</span></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="need">*</td>
-                    <td>确认密码：</td>
-                    <td><input type="password" value="" name="repassword" class="inputxt" recheck="password"  datatype="*6-18" errormsg="两次输入的密码不一致！" /></td>
-                    <td><div class="Validform_checktip"></div></td>
-                </tr>
-                <tr>
-                    <td class="need"></td>
-                    <td></td>
-                    <td colspan="2" style="padding:10px 0 18px 0;">
-                        <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
-                    </td>
-                </tr>
-            </table>
-        </form>
-        
-        <h2>说明：</h2>
-        <div class="tipmsg">
-        	<p>需要另外引入相关的js文件。</p>
-        </div>
-         
-    </div>
-</div>
+<!--<div class="main">-->
+    <!--<div class="wraper">-->
+        <!--<p class="tr"><a href="demo.html" class="blue ml10 fz12">返回示例首页&raquo;</a></p>-->
+        <!---->
+    	<!--<h2 class="green">在符合验证要求时才有密码强度提示</h2>-->
+        <!---->
+        <!--<form class="registerform" action="demo/ajax_post.php" method="post">-->
+            <!--<table width="100%" style="table-layout:fixed;">-->
+                <!--<tr>-->
+                    <!--<td class="need" style="width:10px;">*</td>-->
+                    <!--<td style="width:70px;">密码：</td>-->
+                    <!--<td style="width:210px;">-->
+                        <!--<input type="password" value="" name="password" class="inputxt" plugin="passwordStrength"  datatype="*6-18" errormsg="密码至少6个字符,最多18个字符！" />-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<div class="Validform_checktip">密码至少6个字符,最多18个字符！</div>-->
+                        <!--<div class="passwordStrength" style="display:none;"><b>密码强度：</b> <span>弱</span><span>中</span><span class="last">强</span></div>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="need">*</td>-->
+                    <!--<td>确认密码：</td>-->
+                    <!--<td><input type="password" value="" name="repassword" class="inputxt" recheck="password"  datatype="*6-18" errormsg="两次输入的密码不一致！" /></td>-->
+                    <!--<td><div class="Validform_checktip"></div></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="need"></td>-->
+                    <!--<td></td>-->
+                    <!--<td colspan="2" style="padding:10px 0 18px 0;">-->
+                        <!--<input type="submit" value="提 交" /> <input type="reset" value="重 置" />-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+        <!--</form>-->
+        <!---->
+        <!--<h2>说明：</h2>-->
+        <!--<div class="tipmsg">-->
+        	<!--<p>需要另外引入相关的js文件。</p>-->
+        <!--</div>-->
+         <!---->
+    <!--</div>-->
+<!--</div>-->
 
+
+<iframe src="1.html"></iframe>
 
 </body>
 </html>
+
 <script>
     seajs.config({
         base: "../global-modules/"
     });
-</script>
-<script>
-seajs.use("base/main",function(){
-    define(function(require, exports, module){
-//        var json = ["控制台","文字排版",{"UI组件":["组件","按钮 图表","树菜单","jQuery UI","可拖拽列表",{"三级菜单":["第一级",{"第四级":["添加产品","查看商品"]}]}]},"表格","表单","插件","日历","相册","更多页面","其他页面"];
-//        require("accordionList").done(function(){
-//            $("#aa").accordionList(json);
-//        });
-
-//        require("Validform");
-//        $(".registerform").Validform({
-//		tiptype:2,
-//		usePlugin:{
-//			passwordstrength:{
-//				minLen:6,//设置密码长度最小值，默认为0;
-//				maxLen:18,//设置密码长度最大值，默认为30;
-//				trigger:function(obj,error){
-//					//该表单元素的keyup和blur事件会触发该函数的执行;
-//					//obj:当前表单元素jquery对象;
-//					//error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
-//
-//					//console.log(error);
-//					if(error){
-//						obj.parent().next().find(".Validform_checktip").show();
-//						obj.parent().next().find(".passwordStrength").hide();
-//					}else{
-//						obj.parent().next().find(".Validform_checktip").hide();
-//						obj.parent().next().find(".passwordStrength").show();
-//					}
-//				}
-//			}
-//		}
-//	});
-        
-//        require.async(["validateform"] , function () {
-//            $(".registerform").validateform({data:[
-//                { type:"check_idcard" , settings : {
-//                    text : " 身份证：",
-//                    isNeed:true,
-//                    titlemessage:"请输入真实身份证号码"
-//                }},
-//                {
-//                    type:"password_register",settings:{
-//                    text : " 密码：",
-//                    text2 : " 确认密码：",
-//                    isNeed : true,
-//                    dataType : "*6-20"
-//                }},
-//                {
-//                    type:"select",settings:{
-//                    text:" 所在城市：",
-//                    dataType:"*",
-//                    data:["请选择城市","上海","长沙","南昌","南京"]
-//                }},
-//                {
-//                    type:"radio",settings:{
-//                    isNeed:true,
-//                    text:" 性别：",
-//                    data:["男","女","基佬"]
-//                }},
-//                {
-//                    type:"checkbox",settings:{
-//                    isNeed:true,
-//                    text:" 购物网：",
-//                    dataType:"max2",
-//                    data:["京东","天猫","当当"],
-//                    titlemessage:"最多选择两项"
-//                }},
-//                {
-//                    type:"datepicker",settings:{
-//                    text:" 出生日期："
-//                }},
-//                {
-//                    type:"datepicker",settings:{
-//                    text:" 死亡日期："
-//                }},
-//                {
-//                    type:"textarea",settings:{
-//                    text:" 备注：",
-//                    titlemessage:"请输入！"
-//                }},
-//                {
-//                    type:"combotree",settings:{
-//                    text:"省份：",
-//                    callback:function(a){
-//                        var v = 1;
-//                    }
-//                }}
-//            ],
-//                onLoadSuccess:function(){
-//                    var a = 1;
-//                }});
-//
-//
-//        } );
+    seajs.use("base/engine",function(engine){
+        new engine().start();
     });
-});
 </script>
