@@ -53,7 +53,8 @@ define(function(require,exports,module){
         "datetimebox" : "{globalPath}/datetimebox/datetimebox",
         "slider" : "{globalPath}/slider/slider",
         "tooltip" : "{globalPath}/tooltip/tooltip",
-        "parser" : "{globalPath}/parser/parser"
+        "parser" : "{globalPath}/parser/parser",
+        "editImage" : "{globalPath}/editImage/editImage"
     };
     var languageMapping = {
         'en':'language/easyui-lang-en',

@@ -26,12 +26,10 @@ define(function(require,exports,module){
     engine.prototype.go = function (url,callBack) {
     	var self = this;
     	seajs.use(this.jQueryUrl,function(){
-    		
             self.ready().done(function(){
+                if (!arguments.length)  return;
 				seajs.use(url,function(){
-					if (callBack) {
-						callBack();
-					} 
+					if (callBack) callBack();
 				});
 			});
         });

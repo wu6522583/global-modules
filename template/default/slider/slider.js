@@ -1,5 +1,6 @@
 define(function(require, exports, module){
 	require("draggable");
+    require.async("skin/slider.css");
 	/**
 	 * jQuery EasyUI 1.3.5
 	 * 

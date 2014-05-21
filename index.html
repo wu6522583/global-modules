@@ -75,8 +75,6 @@
 <!--</div>-->
 
 
-<iframe src="1.html"></iframe>
-
 </body>
 </html>
 
@@ -85,6 +83,49 @@
         base: "../global-modules/"
     });
     seajs.use("base/engine",function(engine){
-        new engine().start();
+        engine.go();
+        define(function(require,exports,module){
+//            require("native_plugins/wind-master/bin/dev/wind-all-0.7.3");
+//            var a = eval(Wind.compile("async",
+//                    function () {
+//                        $await(Wind.Async.sleep(1000));
+//                        console.log(0);
+//
+//                        $await(Wind.Async.sleep(1000));
+//                        $await(Wind.Async.sleep(1000));
+//                        $await(Wind.Async.sleep(1000));
+//                        console.log(1.3216);
+//
+//                        var a = 0, current = 1;
+//                        while (true) {
+//                            var b = a;
+//                            a = current;
+//                            current = a + b;
+//
+//                            $await(Wind.Async.sleep(1000));
+//                            console.log(current);
+//                        }
+//                    }
+//            ));
+//            a().start();
+            require("dialog");
+            var edi = require("1");
+            var options = {
+                title:'图片编辑',
+                href: './1.html',
+                width:1280,
+                height:800,
+                onLoad:function(){
+                    new edi().init();
+                }
+            }
+            var opts = $.extend({
+                modal:true,
+                onClose : function() {
+                    $(this).dialog('destroy');
+                }
+            },options);
+            $('<div/>').dialog(opts);
+        });
     });
 </script>

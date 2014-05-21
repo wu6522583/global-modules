@@ -24,6 +24,7 @@ define(function(require,exports,module){
         seajs.use(_arr_idr,function(){
             var arg = arguments.length;
             for (var v = 0 ; v < arg ; v ++) {
+                if (!arguments[v]) continue;
                 window[_arr_key[v]] = new arguments[v]();
             }
             window.staticObjectArr = self.staticObjectArr;
