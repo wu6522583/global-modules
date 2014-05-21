@@ -76,12 +76,58 @@ define(function(require,exports,module){
                 img = new Image();
                 img.src = opts.imageUrl;
                 img.onload = function () {
-                    canvasObj.width = img.width;
-                    canvasObj.height = img.height;
-                    ctx.translate(  -(img.width/2) , -(img.height/2) );
-                    ctx.rotate(Math.PI * 2 / 36 );
-                    ctx.drawImage(img, (img.width/2) , (img.height/2) , $("#edim").width(), $("#edim").height() );
-                    window.open(canvasObj.toDataURL("image/png"),"smallwin","width="+$("#edim").width()+",height="+$("#edim").height()+"");
+                    var imgW = img.width;
+                    var imgH = img.height;
+                    var rightAngleA;
+                    var rightAngleB;
+                    var rightAngleC;
+                    var rightAngleD;
+                    var canvasWidth = imgW;
+                    var canvasHeight = imgH ;
+                    if (rotateVal > 0 && rotateVal <= 90) {
+                        rightAngleA = imgW*Math.sin( rotateVal *(Math.PI/180));
+                        rightAngleB = imgW*Math.sin( (90-rotateVal) *(Math.PI/180) );
+                        rightAngleC = imgH*Math.sin( rotateVal *(Math.PI/180));
+                        rightAngleD = imgH*Math.sin( (90-rotateVal) *(Math.PI/180) );
+                        canvasHeight = rightAngleA + rightAngleD;
+                        canvasWidth = rightAngleB + rightAngleC;
+                        canvasObj.width = canvasWidth;
+                        canvasObj.height = canvasHeight;
+                        ctx.translate( rightAngleC ,   0 );
+                    } else if (rotateVal > 90 && rotateVal <= 180) {
+                        rightAngleA = imgW*Math.sin( (rotateVal - 90) *(Math.PI/180));
+                        rightAngleB = imgW*Math.sin( (180-rotateVal) *(Math.PI/180) );
+                        rightAngleC = imgH*Math.sin( (rotateVal - 90) *(Math.PI/180));
+                        rightAngleD = imgH*Math.sin( (180-rotateVal) *(Math.PI/180) );
+                        canvasHeight = rightAngleC + rightAngleB;
+                        canvasWidth = rightAngleA + rightAngleD;
+                        canvasObj.width = canvasWidth;
+                        canvasObj.height = canvasHeight;
+                        ctx.translate( rightAngleD+rightAngleA ,  rightAngleC );
+                    } else if (rotateVal > 180 && rotateVal <= 270) {
+                        rightAngleA = imgW*Math.sin( (rotateVal - 180) *(Math.PI/180));
+                        rightAngleB = imgW*Math.sin( (270-rotateVal) *(Math.PI/180) );
+                        rightAngleC = imgH*Math.sin( (rotateVal - 180) *(Math.PI/180));
+                        rightAngleD = imgH*Math.sin( (270-rotateVal) *(Math.PI/180) );
+                        canvasHeight = rightAngleA + rightAngleD;
+                        canvasWidth = rightAngleB + rightAngleC;
+                        canvasObj.width = canvasWidth;
+                        canvasObj.height = canvasHeight;
+                        ctx.translate( rightAngleB ,  rightAngleA + rightAngleD );
+                    } else if (rotateVal > 270 && rotateVal <= 360) {
+                        rightAngleA = imgW*Math.sin( (rotateVal - 270) *(Math.PI/180));
+                        rightAngleB = imgW*Math.sin( (360-rotateVal) *(Math.PI/180) );
+                        rightAngleC = imgH*Math.sin( (rotateVal - 270) *(Math.PI/180));
+                        rightAngleD = imgH*Math.sin( (360-rotateVal) *(Math.PI/180) );
+                        canvasHeight = rightAngleC + rightAngleB;
+                        canvasWidth = rightAngleA + rightAngleD;
+                        canvasObj.width = canvasWidth;
+                        canvasObj.height = canvasHeight;
+                        ctx.translate( 0 , rightAngleB );
+                    }
+                    ctx.rotate(Math.PI * rotateVal / 180 );
+                    ctx.drawImage(img, 0 , 0 , imgW , imgH );
+                    window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
                 }
             }
         }
@@ -129,7 +175,7 @@ define(function(require,exports,module){
             jq.append(_html);
             $("#sliderSize").slider({
                 onChange:function(_s){
-                    rotateVal = _s;
+                    rotateVal = _s*3.6;
                     $("#divEditImage").css("transform","rotate("+ 3.6*_s +"deg)");
                     $("#divEditImage").css("-webkit-transform","rotate("+ 3.6*_s +"deg)");
                     $("#divEditImage").css("-moz-transform","rotate("+ 3.6*_s +"deg)");
@@ -142,7 +188,7 @@ define(function(require,exports,module){
             image.onload = function () {
                 $("#divEditImage").width(image.width);
                 $("#divEditImage").height(image.height + 50);
-                $("#edim").css("overflow","auto");
+//                $("#edim").css("overflow","auto");
             }
 
             clipApi = $("#editImage").Jcrop({

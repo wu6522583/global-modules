@@ -6,7 +6,7 @@ canvas{
     visibility: hidden;
 }
 #controlContent{
-    position: absolute;
+    position: relative;
     z-index: 10000000000000000;
     overflow: hidden;
 }
