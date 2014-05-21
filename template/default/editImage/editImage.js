@@ -93,6 +93,7 @@ define(function(require,exports,module){
                         canvasWidth = rightAngleB + rightAngleC;
                         canvasObj.width = canvasWidth;
                         canvasObj.height = canvasHeight;
+
                         ctx.translate( rightAngleC ,   0 );
                     } else if (rotateVal > 90 && rotateVal <= 180) {
                         rightAngleA = imgW*Math.sin( (rotateVal - 90) *(Math.PI/180));
