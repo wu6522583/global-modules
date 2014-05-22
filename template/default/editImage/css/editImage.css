@@ -10,3 +10,6 @@ canvas{
     z-index: 10000000000000000;
     overflow: hidden;
 }
+#divEditImage{
+    position: relative;
+}

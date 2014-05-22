@@ -49,6 +49,7 @@ define(function(require,exports,module){
         "numberspinner" : "{globalPath}/numberspinner/numberspinner",
         "timespinner" : "{globalPath}/timespinner/timespinner",
         "tree" : "{globalPath}/tree/tree",
+        "upload" : "{globalPath}/upload/upload",
         "datebox" : "{globalPath}/datebox/datebox",
         "datetimebox" : "{globalPath}/datetimebox/datetimebox",
         "slider" : "{globalPath}/slider/slider",

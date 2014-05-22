@@ -3,7 +3,7 @@ define(function(require,exports,module){
     function editI(){}
     editI.prototype.init = function () {
         $("#edim").editImage({
-            "imageUrl":"2.jpg"
+            "imageUrl":"1.jpg"
         });
     }
     module.exports = editI;

@@ -181,43 +181,67 @@ define(function(require,exports,module){
 						  }
 						  return this;
 					  },
-					  
-					  //文件上传
-					  funUploadFile: function(file) {
-						  var self = this;	
-						  (function(file) {
-							  var xhr = new XMLHttpRequest();
-							  if (xhr.upload) {
-								  // 上传中
-								  xhr.upload.addEventListener("progress", function(e) {
-									  self.onProgress(file, e.loaded, e.total);
-								  }, false);
-					  
-								  // 文件上传成功或是失败
-								  xhr.onreadystatechange = function(e) {
-									  if (xhr.readyState == 4) {
-										  if (xhr.status == 200) {
-											  self.onUploadSuccess(file, xhr.responseText);
-											  setTimeout(function(){ZXXFILE.onDelete(file.index);},option.removeTimeout);
-											 
-											  self.onUploadComplete();	
-											  
-										  } else {
-											  self.onUploadError(file, xhr.responseText);		
-										  }
-									  }
-								  };
-					  
-					  			  option.onUploadStart();	
-								  // 开始上传
-								  xhr.open("POST", self.url, true);
-								  xhr.setRequestHeader("X_FILENAME", file.name);
-								  xhr.send(file);
-							  }	
-						  })(file);	
-						  
-							  
-					  },
+
+                          funUploadFile: function(file) {
+                              var self = this;
+
+                              ZXXFILE.readLocalFileI(file).done(function(imageObj){
+                                  var b64 = imageObj.substring(22);
+                                  $.ajax({
+                                      type:"post",
+                                      url: self.url,
+                                      data: {files:b64}
+                                  }).done(function() {
+                                      self.onUploadComplete();
+                                  });
+                              });
+//						  (function(file) {
+//							  var xhr = new XMLHttpRequest();
+//							  if (xhr.upload) {
+//								  // 上传中
+//								  xhr.upload.addEventListener("progress", function(e) {
+//									  self.onProgress(file, e.loaded, e.total);
+//								  }, false);
+//
+//								  // 文件上传成功或是失败
+//								  xhr.onreadystatechange = function(e) {
+//									  if (xhr.readyState == 4) {
+//										  if (xhr.status == 200) {
+//											  self.onUploadSuccess(file, xhr.responseText);
+//											  setTimeout(function(){ZXXFILE.onDelete(file.index);},option.removeTimeout);
+//
+//											  self.onUploadComplete();
+//
+//										  } else {
+//											  self.onUploadError(file, xhr.responseText);
+//										  }
+//									  }
+//								  };
+//
+//					  			  option.onUploadStart();
+//								  // 开始上传
+//					  			ZXXFILE.readLocalFileI(file).done(function(imageObj){
+//					  				xhr.open("POST", self.url, true);
+//									  xhr.setRequestHeader("files", imageObj);
+//									  xhr.send(file);
+//					  			});
+//
+//							  }
+//						  })(file);
+
+
+                          },
+                          readLocalFileI:function (fileObj ) {
+                              var def = $.Deferred();
+                              var reader = new FileReader();
+                              reader.onload = function(e){
+                                  def.resolve(e.currentTarget.result);
+                              }
+                              reader.onprogress = function(e){}
+                              reader.onloadend = function(e){}
+                              reader.readAsDataURL(fileObj);
+                              return def.promise();
+                          },
 					  
 					  init: function() {
 						  var self = this;

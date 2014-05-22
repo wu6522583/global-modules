@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="html5image"
+  id="myeclipse.1343008123399"
+  context-root="/html5image"
+  j2ee-spec="1.4"
+  archive="html5image.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebContent" />
+  </attributes>
+</project-module>
+

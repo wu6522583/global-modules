@@ -61,7 +61,7 @@ $.Jcrop = function(obj,opt)
 		addClass:			null,
 
 		// Styling Options
-		bgColor:			'black',
+		bgColor:			'transparent',
 		bgOpacity:			.6,
 		borderOpacity:		.4,
 		handleOpacity:		.5,

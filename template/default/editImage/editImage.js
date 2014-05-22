@@ -21,7 +21,27 @@ define(function(require,exports,module){
 //        "<ul id='tableUlRight'></ul>" +
 //        "</li>" +
 //        "</ul>";
-    var _html = "<div id='divEditImage'><img id='editImage' /></div>";
+    var _html = '' +
+        '<div id="controlContent" class="easyui-tabs" data-options="tabWidth:112" style="width:700px;height:100px">' +
+            '<div title="图像裁剪" style="padding:10px">' +
+                '宽度：<input id="clipWidth" maxlength="4" /> 高度：<input id="clipHeight" maxlength="4" /> <input type="button" id="sureClip" value="剪切" />' +
+            '</div>' +
+            '<div title="图片旋转" style="padding:10px">' +
+                '<input id="sliderSize" style="width:150px" data-options="showTip:true" /> <input type="button" id="saveRotate" value="应用" />' +
+            '</div>' +
+            '<div title="图片水印" style="padding:10px">' +
+                '<input type="file" id="changeFile"/><input type="button" id="buildWaterMark" value="生成">' +
+            '</div>' +
+            '<div title="文字水印" style="padding:10px">' +
+                '<p>History Content.</p>' +
+            '</div>' +
+            '<div title="缩略设置" style="padding:10px">' +
+                '<p>References Content.</p>' +
+            '</div>' +
+        '</div>';
+    var _imageControl = '<div id="divEditImage">' +
+            '<img id="editImage" />' +
+        '</div>';
     (function($){
         var clipAreaO = [ 0 , 0 , 0 , 0];
         var clipApi;
@@ -31,10 +51,11 @@ define(function(require,exports,module){
         var opts ;
         var ctx;
         var canvasObj;
-        var bgiw;
-        var bgih;
         var img;
         var rotateVal = 0;
+        var imageWaterMarkList = [];
+        var rootImage;
+        var currentSelected = 0;
         function showCoords(c) {
             clipAreaO[0] = c.x;
             clipAreaO[1] = c.y;
@@ -47,155 +68,200 @@ define(function(require,exports,module){
                 $("#clipHeight").val(c.h);
             }
         }
+        var _cid = 0
+        function cid() {
+            return _cid++
+        }
+        /*
+        * 剪切图片，并且生成图片
+        * */
         function clipImage () {
             var width = clipAreaO[2] - clipAreaO[0];
             var height = clipAreaO[3] - clipAreaO[1];
-
-            $("#divEditImage").append("<canvas />");
-            canvasObj = document.getElementsByTagName("canvas")[0];
-            ctx = canvasObj.getContext('2d');
-            if ( opts.imageUrl ) {
-                img = new Image();
-                img.src = opts.imageUrl;
-                img.onload = function () {
-                    canvasObj.width = width;
-                    canvasObj.height = height;
-                    ctx.drawImage(img, clipAreaO[0], clipAreaO[1], width, height ,0 , 0, width, height);
-//                    $("#editImage").attr("src",canvasObj.toDataURL("image/png"));
-                    window.open(canvasObj.toDataURL("image/png"),"smallwin","width=800,height=700");
-                }
+            initCanvasObj();
+            img = new Image();
+            img.src = rootImage;
+            img.onload = function () {
+                canvasObj.width = width;
+                canvasObj.height = height;
+                ctx.drawImage(img, clipAreaO[0], clipAreaO[1], width, height ,0 , 0, width, height);
+                setRootImage(canvasObj.toDataURL("image/png"));
+                _buildCanvas();
+                window.open(canvasObj.toDataURL("image/png"),"smallwin","width=800,height=700");
             }
             $(clipApi).data('Jcrop').release();
         }
+        /**
+         * 旋转图片并且生成图片
+         * */
         function rotateImage () {
+            initCanvasObj();
+            img = new Image();
+            img.src = rootImage;
+            img.onload = function () {
+                var imgW = img.width;
+                var imgH = img.height;
+                var rightAngleA;
+                var rightAngleB;
+                var rightAngleC;
+                var rightAngleD;
+                var canvasWidth = imgW;
+                var canvasHeight = imgH ;
+                if (rotateVal > 0 && rotateVal <= 90) {
+                    rightAngleA = imgW*Math.sin( rotateVal *(Math.PI/180));
+                    rightAngleB = imgW*Math.sin( (90-rotateVal) *(Math.PI/180) );
+                    rightAngleC = imgH*Math.sin( rotateVal *(Math.PI/180));
+                    rightAngleD = imgH*Math.sin( (90-rotateVal) *(Math.PI/180) );
+                    canvasHeight = rightAngleA + rightAngleD;
+                    canvasWidth = rightAngleB + rightAngleC;
+                    canvasObj.width = canvasWidth;
+                    canvasObj.height = canvasHeight;
+
+                    ctx.translate( rightAngleC ,   0 );
+                } else if (rotateVal > 90 && rotateVal <= 180) {
+                    rightAngleA = imgW*Math.sin( (rotateVal - 90) *(Math.PI/180));
+                    rightAngleB = imgW*Math.sin( (180-rotateVal) *(Math.PI/180) );
+                    rightAngleC = imgH*Math.sin( (rotateVal - 90) *(Math.PI/180));
+                    rightAngleD = imgH*Math.sin( (180-rotateVal) *(Math.PI/180) );
+                    canvasHeight = rightAngleC + rightAngleB;
+                    canvasWidth = rightAngleA + rightAngleD;
+                    canvasObj.width = canvasWidth;
+                    canvasObj.height = canvasHeight;
+                    ctx.translate( rightAngleD+rightAngleA ,  rightAngleC );
+                } else if (rotateVal > 180 && rotateVal <= 270) {
+                    rightAngleA = imgW*Math.sin( (rotateVal - 180) *(Math.PI/180));
+                    rightAngleB = imgW*Math.sin( (270-rotateVal) *(Math.PI/180) );
+                    rightAngleC = imgH*Math.sin( (rotateVal - 180) *(Math.PI/180));
+                    rightAngleD = imgH*Math.sin( (270-rotateVal) *(Math.PI/180) );
+                    canvasHeight = rightAngleA + rightAngleD;
+                    canvasWidth = rightAngleB + rightAngleC;
+                    canvasObj.width = canvasWidth;
+                    canvasObj.height = canvasHeight;
+                    ctx.translate( rightAngleB ,  rightAngleA + rightAngleD );
+                } else if (rotateVal > 270 && rotateVal <= 360) {
+                    rightAngleA = imgW*Math.sin( (rotateVal - 270) *(Math.PI/180));
+                    rightAngleB = imgW*Math.sin( (360-rotateVal) *(Math.PI/180) );
+                    rightAngleC = imgH*Math.sin( (rotateVal - 270) *(Math.PI/180));
+                    rightAngleD = imgH*Math.sin( (360-rotateVal) *(Math.PI/180) );
+                    canvasHeight = rightAngleC + rightAngleB;
+                    canvasWidth = rightAngleA + rightAngleD;
+                    canvasObj.width = canvasWidth;
+                    canvasObj.height = canvasHeight;
+                    ctx.translate( 0 , rightAngleB );
+                }
+                ctx.rotate(Math.PI * rotateVal / 180 );
+                ctx.drawImage(img, 0 , 0 , imgW , imgH );
+                setRootImage(canvasObj.toDataURL("image/png"));
+                _buildCanvas();
+                window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
+            }
+        }
+        function setRootImage( _setOpt ){
+            if ( !_setOpt && opts.imageUrl) {
+                rootImage = opts.imageUrl;
+            } else {
+                rootImage = _setOpt;
+            }
+        }
+        function initCanvasObj () {
             $("#divEditImage").find("canvas").remove();
             $("#divEditImage").append("<canvas />");
             canvasObj = document.getElementsByTagName("canvas")[0];
             ctx = canvasObj.getContext('2d');
-            if ( opts.imageUrl ) {
-                img = new Image();
-                img.src = opts.imageUrl;
-                img.onload = function () {
-                    var imgW = img.width;
-                    var imgH = img.height;
-                    var rightAngleA;
-                    var rightAngleB;
-                    var rightAngleC;
-                    var rightAngleD;
-                    var canvasWidth = imgW;
-                    var canvasHeight = imgH ;
-                    if (rotateVal > 0 && rotateVal <= 90) {
-                        rightAngleA = imgW*Math.sin( rotateVal *(Math.PI/180));
-                        rightAngleB = imgW*Math.sin( (90-rotateVal) *(Math.PI/180) );
-                        rightAngleC = imgH*Math.sin( rotateVal *(Math.PI/180));
-                        rightAngleD = imgH*Math.sin( (90-rotateVal) *(Math.PI/180) );
-                        canvasHeight = rightAngleA + rightAngleD;
-                        canvasWidth = rightAngleB + rightAngleC;
-                        canvasObj.width = canvasWidth;
-                        canvasObj.height = canvasHeight;
-
-                        ctx.translate( rightAngleC ,   0 );
-                    } else if (rotateVal > 90 && rotateVal <= 180) {
-                        rightAngleA = imgW*Math.sin( (rotateVal - 90) *(Math.PI/180));
-                        rightAngleB = imgW*Math.sin( (180-rotateVal) *(Math.PI/180) );
-                        rightAngleC = imgH*Math.sin( (rotateVal - 90) *(Math.PI/180));
-                        rightAngleD = imgH*Math.sin( (180-rotateVal) *(Math.PI/180) );
-                        canvasHeight = rightAngleC + rightAngleB;
-                        canvasWidth = rightAngleA + rightAngleD;
-                        canvasObj.width = canvasWidth;
-                        canvasObj.height = canvasHeight;
-                        ctx.translate( rightAngleD+rightAngleA ,  rightAngleC );
-                    } else if (rotateVal > 180 && rotateVal <= 270) {
-                        rightAngleA = imgW*Math.sin( (rotateVal - 180) *(Math.PI/180));
-                        rightAngleB = imgW*Math.sin( (270-rotateVal) *(Math.PI/180) );
-                        rightAngleC = imgH*Math.sin( (rotateVal - 180) *(Math.PI/180));
-                        rightAngleD = imgH*Math.sin( (270-rotateVal) *(Math.PI/180) );
-                        canvasHeight = rightAngleA + rightAngleD;
-                        canvasWidth = rightAngleB + rightAngleC;
-                        canvasObj.width = canvasWidth;
-                        canvasObj.height = canvasHeight;
-                        ctx.translate( rightAngleB ,  rightAngleA + rightAngleD );
-                    } else if (rotateVal > 270 && rotateVal <= 360) {
-                        rightAngleA = imgW*Math.sin( (rotateVal - 270) *(Math.PI/180));
-                        rightAngleB = imgW*Math.sin( (360-rotateVal) *(Math.PI/180) );
-                        rightAngleC = imgH*Math.sin( (rotateVal - 270) *(Math.PI/180));
-                        rightAngleD = imgH*Math.sin( (360-rotateVal) *(Math.PI/180) );
-                        canvasHeight = rightAngleC + rightAngleB;
-                        canvasWidth = rightAngleA + rightAngleD;
-                        canvasObj.width = canvasWidth;
-                        canvasObj.height = canvasHeight;
-                        ctx.translate( 0 , rightAngleB );
+        }
+        function _eachWatermark () {
+            var def = $.Deferred();
+            var _index = 0;
+            var _IA = imageWaterMarkList;
+            $.each(_IA,function( i , I){
+                $.each(I,function( k , _K ){
+                    var img = new Image();
+                    img.src = _K.src;
+                    img.onload = function () {
+                        _index ++ ;
+                        var W = $("#"+k).width();
+                        var H = $("#"+k).height();
+                        var L = parseInt($("#"+k).css("left"));
+                        var T = parseInt($("#"+k).css("top"));
+                        ctx.drawImage(img, L, T, W, H);
+                        if ( _index == _IA.length) {
+                            def.resolve();
+                        }
                     }
-                    ctx.rotate(Math.PI * rotateVal / 180 );
-                    ctx.drawImage(img, 0 , 0 , imgW , imgH );
+                });
+            });
+            return def.promise();
+        }
+        function _buildIWatermark(){
+            initCanvasObj();
+            img = new Image();
+            img.src = rootImage;
+            var width = img.width;
+            var height = img.height;
+            img.onload = function () {
+                canvasObj.width = width;
+                canvasObj.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
+                _eachWatermark().done(function(){
+                    setRootImage(canvasObj.toDataURL("image/png"));
+                    _buildCanvas();
                     window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
-                }
+                });
             }
         }
-
-        function init(target){
-            opts = $.data(target, 'editImage').options;
-            jq = $(target);
-            parentWidth = jq.parent().width();
-            parentHeight = jq.parent().height();
-            jq.html("<div id='controlContent'></div>");
-            $("#controlContent").tabs({
-                onSelect : function ( tit , _index ) {
-                    if ( clipApi ) {
-                        $(clipApi).data('Jcrop').release();
+        function addImageWatermark( _OBJ ){
+            var _OCID = "imageWaterMark_"+cid();
+            var _json = {};
+            _json[_OCID] = _OBJ;
+            imageWaterMarkList.push(_json);
+            $("#divEditImage").append('<div id="'+_OCID+'" style="position: absolute; left: 0px; top: 0px;" ></div>');
+            $("#"+_OCID).width(_OBJ.width);
+            $("#"+_OCID).height(_OBJ.height);
+            $("#"+_OCID).append(_OBJ);
+//            $("#"+_OCID).css("background-image",_OBJ);
+            $("#"+_OCID).draggable({
+                onDrag:function(e){
+                    var d = e.data;
+                    if (d.left < 0){d.left = 0}
+                    if (d.top < 0){d.top = 0}
+                    if (d.left + $(d.target).outerWidth() > $(d.parent).width()){
+                        d.left = $(d.parent).width() - $(d.target).outerWidth();
+                    }
+                    if (d.top + $(d.target).outerHeight() > $(d.parent).height()){
+                        d.top = $(d.parent).height() - $(d.target).outerHeight();
                     }
                 }
             });
-            $("#controlContent").tabs('add',{
-                title:'剪切',
-                content:"宽度：<input id='clipWidth' maxlength='4' /> 高度：<input id='clipHeight' maxlength='4' /> <input type='button' id='sureClip' value='剪切' />",
-                tabWidth : "100"
-            });
-            $("#controlContent").tabs('add',{
-                title:'图片旋转',
-                content:"<br/><input id='sliderSize' style='width:150px' data-options='showTip:true' /> <input type='button' id='saveRotate' value='应用' />",
-                tabWidth : "100"
-            });
-            $("#controlContent").tabs('add',{
-                title:'图片水印',
-                content:'<br/><br/>',
-                tabWidth : "100"
-            });
-            $("#controlContent").tabs('add',{
-                title:'文字水印',
-                content:'<br/><br/>',
-                tabWidth : "100"
-            });
-            $("#controlContent").tabs('add',{
-                title:'缩略设置',
-                content:'<br/><br/>',
-                tabWidth : "100"
-            });
-            $("#controlContent").tabs({"selected":"0"});
-
-            jq.append(_html);
-            $("#sliderSize").slider({
-                onChange:function(_s){
-                    rotateVal = _s*3.6;
-                    $("#divEditImage").css("transform","rotate("+ 3.6*_s +"deg)");
-                    $("#divEditImage").css("-webkit-transform","rotate("+ 3.6*_s +"deg)");
-                    $("#divEditImage").css("-moz-transform","rotate("+ 3.6*_s +"deg)");
-                }
-            });
-            $("#editImage").attr("src",opts.imageUrl);
-
-            var image = new Image();
-            image.src = opts.imageUrl;
-            image.onload = function () {
-                $("#divEditImage").width(image.width);
-                $("#divEditImage").height(image.height + 50);
-//                $("#edim").css("overflow","auto");
-            }
-
+        }
+        function initClipPlugin(){
             clipApi = $("#editImage").Jcrop({
                 onChange: showCoords,
                 onSelect: showCoords
             });
+        }
+        function imageRoate( _s ){
+            $("#divEditImage").css("transform","rotate("+ _s +"deg)");
+            $("#divEditImage").css("-webkit-transform","rotate("+ _s +"deg)");
+            $("#divEditImage").css("-moz-transform","rotate("+ _s +"deg)");
+        }
+        function _buildCanvas () {
+            if ( $("#divEditImage") ) {
+                clipApi = null;
+                $("#divEditImage").remove();
+            }
+            jq.append(_imageControl);
+            $("#editImage").attr("src",rootImage);
+
+            var image = new Image();
+            image.src = rootImage;
+            image.onload = function () {
+                $("#divEditImage").width(image.width);
+                $("#divEditImage").height(image.height);
+            }
+            if ( 0 == currentSelected ) {
+                initClipPlugin();
+            }
+
             $("#clipWidth").keyup(function(ev) {
                 clipAreaO[2] = clipAreaO[0] + parseInt(ev.currentTarget.value);
                 $(clipApi).data('Jcrop').setSelect(clipAreaO);
@@ -204,12 +270,90 @@ define(function(require,exports,module){
                 clipAreaO[3] = clipAreaO[1] + parseInt(ev.currentTarget.value);
                 $(clipApi).data('Jcrop').setSelect(clipAreaO);
             });
+        }
+        function init(target){
+            opts = $.data(target, 'editImage').options;
+            jq = $(target);
+            parentWidth = jq.parent().width();
+            parentHeight = jq.parent().height();
+            jq.append(_html);
+
+            $("#controlContent").tabs({
+                onSelect : function ( tit , _index ) {
+                    currentSelected = _index;
+                    switch (_index){
+                        case 0:
+                            if ( !clipApi ) {
+                                initClipPlugin();
+                            } else {
+                                $("#editImage").css("display","none");
+                                $(".jcrop-holder").css("display","block");
+                            }
+                            break;
+                        case 1:
+
+                            break;
+                        case 2:
+                            break;
+                    }
+                },
+                onUnselect : function (tit , _index) {
+                    switch ( _index ){
+                        case 0:
+                            $(".jcrop-holder").css("display","none");
+                            $("#editImage").css("display","block");
+                            $(clipApi).data('Jcrop').release();
+                            break;
+                        case 1:
+                            $("#sliderSize").slider({value:0});
+                            imageRoate(0);
+                            break;
+                        case 2:
+                            $.each(imageWaterMarkList,function( m , M ){
+                                $.each( M ,function( n , N){
+                                    $("#"+n).remove();
+                                });
+                            });
+                            imageWaterMarkList = [];
+                            break;
+                    }
+                }
+            });
+            $("#sliderSize").slider({
+                onChange:function(_s){
+                    rotateVal = _s*3.6;
+                    imageRoate(rotateVal);
+                }
+            });
+            setRootImage();
+            _buildCanvas();
             $("#sureClip").click(function(){
                 clipImage();
             });
             $("#saveRotate").click(function(){
                 rotateImage();
             });
+            $("#changeFile").change(function(){
+                readLocalFileI(arguments[0].currentTarget.files[0]).done(function(IO){
+                    var imgObj = new Image();
+                    imgObj.src = IO;
+                    addImageWatermark(imgObj);
+                });
+            });
+            $("#buildWaterMark").click(function(){
+                _buildIWatermark();
+            });
+        }
+        function readLocalFileI (fileObj ) {
+            var def = $.Deferred();
+            var reader = new FileReader();
+            reader.onload = function(e){
+                def.resolve(e.currentTarget.result);
+            }
+            reader.onprogress = function(e){}
+            reader.onloadend = function(e){}
+            reader.readAsDataURL(fileObj);
+            return def.promise();
         }
         $.fn.editImage = function(options, param){
             if (typeof options == 'string'){
