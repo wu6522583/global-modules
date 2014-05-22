@@ -55,7 +55,7 @@ define(function(require,exports,module){
         "slider" : "{globalPath}/slider/slider",
         "tooltip" : "{globalPath}/tooltip/tooltip",
         "parser" : "{globalPath}/parser/parser",
-        "editImage" : "{globalPath}/editImage/editImage"
+        "photoshop" : "{globalPath}/photoshop/photoshop"
     };
     var languageMapping = {
         'en':'language/easyui-lang-en',
@@ -90,7 +90,7 @@ define(function(require,exports,module){
             }
         });
         this.setLanguage("zh_CN");
-        this.setSkin("../../../themes/bootstrap");
+        this.setSkin("../../../themes/default/bootstrap");
     }
     sysConfig.prototype.addPlugin = function ( name , dir ) {
         if ( isString(name) && isString(dir) ) {

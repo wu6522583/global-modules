@@ -108,26 +108,13 @@
 //                    }
 //            ));
 //            a().start();
-            require("dialog");
-            var edi = require("1");
-            var options = {
-                title:'图片编辑',
-                href: './1.html',
-                width:1280,
-                height:800,
-                onLoad:function(){
-                    new edi().init();
-                }
-            }
-            var opts = $.extend({
-                modal:true,
-                onClose : function() {
-                    $(this).dialog('destroy');
-                }
-            },options);
-            $('<div/>').dialog(opts);
+            require("photoshop");
+            $('<div/>').photoshop({
+                "imageUrl":"1.jpg"
+            });
 
 
+            var a= 1;
 //            require("upload");
 //            $("#upload").html5uploader({
 //                auto:true,
