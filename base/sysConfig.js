@@ -55,8 +55,7 @@ define(function(require,exports,module){
         "slider" : "{globalPath}/slider/slider",
         "tooltip" : "{globalPath}/tooltip/tooltip",
         "parser" : "{globalPath}/parser/parser",
-        "photoshop" : "{globalPath}/photoshop/photoshop",
-        "editImage" : "{globalPath}/photoshop/editImage"
+        "photoshop" : "{globalPath}/photoshop/photoshop"
     };
     var languageMapping = {
         'en':'language/easyui-lang-en',
