@@ -1,5 +1,5 @@
 /* Fixes issue here http://code.google.com/p/jcrop/issues/detail?id=1 */
-.jcrop-holder { text-align: center; z-index: 9999 }
+.jcrop-holder { text-align: left; z-index: 9999 }
 
 .jcrop-vline, .jcrop-hline
 {

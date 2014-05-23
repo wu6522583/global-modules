@@ -1,24 +1,36 @@
 define(function(require,exports,module){
     require("tabs");
     require("slider");
+    require("draggable");
     require("./css/editImage.css");
     require("./css/jquery.Jcrop.css");
     require("./js/jquery.Jcrop");
+
     var _html = '' +
-        '<div id="controlContent" class="easyui-tabs" data-options="tabWidth:112" style="width:700px;height:100px">' +
-            '<div title="图像裁剪" style="padding:10px">' +
-                '宽度：<input id="clipWidth" maxlength="4" /> 高度：<input id="clipHeight" maxlength="4" /> <input type="button" id="sureClip" value="应用" style="position: absolute; right: 0px; top: 0px;" />' +
+        '<div id="controlContent" class="easyui-tabs" style="height:100px;width:800px" >' +
+            '<div title="图像裁剪" >' +
+                '宽度：<input id="clipWidth" maxlength="4" /> 高度：<input id="clipHeight" maxlength="4" /> ' +
             '</div>' +
-            '<div title="图片旋转" style="padding:10px">' +
-                '<input id="sliderSize" style="width:450px" data-options="showTip:false" /> <input type="button" id="saveRotate" value="应用" style="position: absolute; right: 0px; top: 0px;"/>' +
+            '<div title="图片旋转" >' +
+                '<br/><input id="sliderSize" style="width:450px;padding-left: 50px;" data-options="showTip:false" /> ' +
             '</div>' +
-            '<div title="图片水印" style="padding:10px">' +
-                '<input type="file" id="changeFile"/><input type="button" id="buildWaterMark" value="应用"  style="position: absolute; right: 0px; top: 0px;" />' +
+            '<div title="图片水印" >' +
+                '<input type="file" id="changeFile"/>' +
             '</div>' +
-        '</div>';
+        '</div><div id="canvasDiv"></div>';
+
     var _imageControl = '<div id="divEditImage">' +
             '<img id="editImage" />' +
         '</div>';
+
+    var _photoshop = "<div id='dlg' class='easyui-dialog' title='图片处理' style='width:1024px;height:800px;' data-options='buttons:"+'"#dlg-buttons"'+" ' >" +
+        _html +
+        "</div>" +
+        "<div id='dlg-buttons'>" +
+            "<a href='javascript:void(0)' class='easyui-linkbutton' >应用</a>" +
+            "<a href='javascript:void(0)' class='easyui-linkbutton' >保存</a>" +
+            "<a href='javascript:void(0)' class='easyui-linkbutton' >关闭</a>" +
+        "</div>";
     (function($){
         var clipAreaO = [ 0 , 0 , 0 , 0];
         var clipApi;
@@ -64,7 +76,7 @@ define(function(require,exports,module){
                 ctx.drawImage(img, clipAreaO[0], clipAreaO[1], width, height ,0 , 0, width, height);
                 setRootImage(canvasObj.toDataURL("image/png"));
                 _buildCanvas();
-                window.open(canvasObj.toDataURL("image/png"),"smallwin","width=800,height=700");
+//                window.open(canvasObj.toDataURL("image/png"),"smallwin","width=800,height=700");
             }
             $(clipApi).data('Jcrop').release();
         }
@@ -130,7 +142,7 @@ define(function(require,exports,module){
                 ctx.drawImage(img, 0 , 0 , imgW , imgH );
                 setRootImage(canvasObj.toDataURL("image/png"));
                 _buildCanvas();
-                window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
+//                window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
             }
         }
         function setRootImage( _setOpt ){
@@ -182,7 +194,7 @@ define(function(require,exports,module){
                 _eachWatermark().done(function(){
                     setRootImage(canvasObj.toDataURL("image/png"));
                     _buildCanvas();
-                    window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
+//                    window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
                 });
             }
         }
@@ -210,6 +222,16 @@ define(function(require,exports,module){
                 }
             });
         }
+        function createImageFile () {
+            var imageData = canvasObj.toDataURL();
+            var b64 = imageData.substring(22);
+            $.ajax({
+                type:"post",
+                url: self.url,
+                data: {files:b64}
+            }).done(function() {
+            });
+        }
         function initClipPlugin(){
             clipApi = $("#editImage").Jcrop({
                 onChange: showCoords,
@@ -226,7 +248,7 @@ define(function(require,exports,module){
                 clipApi = null;
                 $("#divEditImage").remove();
             }
-            jq.append(_imageControl);
+            $("#canvasDiv").append(_imageControl);
             $("#editImage").attr("src",rootImage);
 
             var image = new Image();
@@ -234,7 +256,6 @@ define(function(require,exports,module){
             image.onload = function () {
                 $("#divEditImage").width(image.width);
                 $("#divEditImage").height(image.height);
-//                $("#divEditImage").css("text-align" , "center");
             }
             if ( 0 == currentSelected ) {
                 initClipPlugin();
@@ -254,8 +275,10 @@ define(function(require,exports,module){
             jq = $(target);
             parentWidth = jq.parent().width();
             parentHeight = jq.parent().height();
-            jq.append(_html);
+            jq.append(_photoshop);
+
             $("#controlContent").tabs({
+                tabWidth : "152px",
                 onSelect : function ( tit , _index ) {
                     currentSelected = _index;
                     switch (_index){
@@ -268,7 +291,6 @@ define(function(require,exports,module){
                             }
                             break;
                         case 1:
-
                             break;
                         case 2:
                             break;
@@ -305,12 +327,6 @@ define(function(require,exports,module){
             });
             setRootImage();
             _buildCanvas();
-            $("#sureClip").click(function(){
-                clipImage();
-            });
-            $("#saveRotate").click(function(){
-                rotateImage();
-            });
             $("#changeFile").change(function(){
                 readLocalFileI(arguments[0].currentTarget.files[0]).done(function(IO){
                     var imgObj = new Image();
@@ -318,8 +334,25 @@ define(function(require,exports,module){
                     addImageWatermark(imgObj);
                 });
             });
-            $("#buildWaterMark").click(function(){
-                _buildIWatermark();
+            $("#dlg-buttons").delegate("a","click",function( ev ){
+                switch ( ev.currentTarget.innerText ) {
+                    case "应用":
+                        if ( 0 == currentSelected) {
+                            clipImage();
+                        } else if ( 1 == currentSelected) {
+                            rotateImage();
+                        } else if ( 2 == currentSelected) {
+                            _buildIWatermark();
+                        }
+//                        window.open(canvasObj.toDataURL("image/png"),"smallwin","width=1440,height=900");
+                        break;
+                    case "保存":
+                        createImageFile();
+                        break;
+                    case "关闭":
+                        $("#dlg").dialog('close');
+                        break;
+                }
             });
         }
         function readLocalFileI (fileObj ) {
@@ -350,7 +383,6 @@ define(function(require,exports,module){
                 init(this);
             });
         };
-
         $.fn.editImage.methods = {
             options: function(jq){
                 return $.data(jq[0], 'editImage').options;

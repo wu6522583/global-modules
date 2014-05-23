@@ -15,7 +15,7 @@ define(function(require,exports,module){
 				onUploadSuccess:function(){},//上传成功的动作
 				onUploadComplete:function(){},//上传完成的动作
 				onUploadError:function(){}, //上传失败的动作
-				onInit:function(){},//初始化时的动作
+				onInit:function(){}//初始化时的动作
 				}
 				
 			var option = $.extend(defaults,opts);

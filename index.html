@@ -73,7 +73,11 @@
          <!---->
     <!--</div>-->
 <!--</div>-->
-<div id="upload"></div>
+<div id="dialogaa">
+
+
+</div>
+
 
 </body>
 </html>
@@ -108,10 +112,43 @@
 //                    }
 //            ));
 //            a().start();
-            require("photoshop");
-            $('<div/>').photoshop({
+            require("editImage");
+            require("dialog");
+//            $('body').editImage({
+//                "imageUrl":"1.jpg"
+//            });
+
+//            require("photoshop");
+//            $('#dialogaa').photoshop({
+//                "imageUrl":"1.jpg"
+//            });
+
+
+//            var opt = {
+//                title:'图片编辑',
+//                content: '<div id="imageEditContent" />',
+//                width:1024,
+//                height:800,
+//                onOpen:function(a){
+//                    $("#imageEditContent").editImage(options);
+//                },
+//                onClose : function() {
+//                    $(this).dialog('destroy');
+//                },
+//                buttons:[
+//                    {text:'保存',iconCls:'save',handler:function(){
+//                    }},
+//                    {text:'取消',iconCls:'close',handler:function(){
+//
+//                    }}
+//                ]
+//            }
+//            data-options=" buttons: '+'#dlg-buttons'+'"
+//            var str = ;
+            $("body").editImage({
                 "imageUrl":"1.jpg"
             });
+
 
 
             var a= 1;

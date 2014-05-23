@@ -8,16 +8,22 @@ define(function(require,exports,module){
                 title:'图片编辑',
                 content: '<div id="imageEditContent" />',
                 width:1024,
-                height:768,
-                modal:true,
+                height:800,
                 onOpen:function(a){
                     $("#imageEditContent").editImage(options);
                 },
                 onClose : function() {
                     $(this).dialog('destroy');
-                }
+                },
+                buttons:[
+                    {text:'保存',iconCls:'save',handler:function(){
+                    }},
+                    {text:'取消',iconCls:'close',handler:function(){
+
+                    }}
+                ]
             }
-            $('<div/>').dialog(opt);
+            this.dialog(opt);
         };
     })(jQuery);
 });
