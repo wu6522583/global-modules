@@ -11,12 +11,15 @@ define(function(require,exports,module){
     
     function engine(){
     	this.jQueryUrl = "lib/jquery/jquery.min";
+    	this.Initialized = false;
     }
     engine.prototype.ready = function () {
     	var def = $.Deferred();
+    	var self = this;
     	
     	require.async("./staticConfig",function(config){
     		staticObject.start({"static":config}).done(function(){
+    			self.Initialized = true;
             	def.resolve();
             });
     	});
@@ -24,15 +27,25 @@ define(function(require,exports,module){
     	return def.promise();
     }
     engine.prototype.go = function (url,callBack) {
+    	var arg = arguments;
     	var self = this;
-    	seajs.use(this.jQueryUrl,function(){
-            self.ready().done(function(){
-                if (!arguments.length)  return;
-				seajs.use(url,function(){
-					if (callBack) callBack();
-				});
+    	if ( !self.Initialized ) {
+    		seajs.use(this.jQueryUrl,function(){
+                self.ready().done(function(){
+                    if (!arg.length)  return;
+    				seajs.use(url,function(){
+    					if (callBack) callBack();
+    				});
+    			});
+            });
+    	} else {
+    		if (!arg.length)  return;
+			seajs.use(url,function(){
+				if (callBack) callBack();
 			});
-        });
+    	}
+    	
     }
-    module.exports = new engine();
+    window.engine = new engine(); 
+    module.exports = window.engine;
 });
