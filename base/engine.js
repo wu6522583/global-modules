@@ -8,8 +8,11 @@ define(function(require,exports,module){
     var sysConfig = require("./sysConfig");
     sysConfig = new sysConfig();
     sysConfig.init();
+
+    require("./seajsE");
     
     function engine(){
+//        this.dependentList = ["lib/jquery/jquery.min","lib/wind/wind-all-0.7.3"];
     	this.jQueryUrl = "lib/jquery/jquery.min";
     	this.Initialized = false;
     }
@@ -44,7 +47,6 @@ define(function(require,exports,module){
 				if (callBack) callBack();
 			});
     	}
-    	
     }
     window.engine = new engine(); 
     module.exports = window.engine;

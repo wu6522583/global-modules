@@ -14,6 +14,9 @@
     </style>
 </head>
 <body>
+<div>
+    <script id="myEditor" type="text/plain" style="width:800px;height:500px"></script>
+</div>
 <!--<form class="registerform" action="ajax_post.php"></form>-->
 <!--<div id="aa" class="easyui-accordion" style="width:300px;height:200px;">-->
     <!--<div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">-->
@@ -112,7 +115,7 @@
 //                    }
 //            ));
 //            a().start();
-            require("photoshop");
+
 //            $('body').editImage({
 //                "imageUrl":"1.jpg"
 //            });
@@ -144,14 +147,18 @@
 //            }
 //            data-options=" buttons: '+'#dlg-buttons'+'"
 //            var str = ;
-            $("body").photoshop({
-                "imageUrl":"1.jpg",
-                url:""
+//            require("photoshop");
+//            $("body").photoshop({
+//                "imageUrl":"1.jpg",
+//                url:""
+//            });
+            var editor = require("editor");
+            editor = new editor();
+            editor.getUeditor().done(function(){
+                UE.getEditor('myEditor');
             });
 
 
-
-            var a= 1;
 //            require("upload");
 //            $("#upload").html5uploader({
 //                auto:true,

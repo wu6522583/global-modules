@@ -55,7 +55,8 @@ define(function(require,exports,module){
         "slider" : "{globalPath}/slider/slider",
         "tooltip" : "{globalPath}/tooltip/tooltip",
         "parser" : "{globalPath}/parser/parser",
-        "photoshop" : "{globalPath}/photoshop/photoshop"
+        "photoshop" : "{globalPath}/photoshop/photoshop",
+        "editor":"{globalPath}/editor/editor"
     };
     var languageMapping = {
         'en':'language/easyui-lang-en',
@@ -85,7 +86,7 @@ define(function(require,exports,module){
             alias : this.mapping,
             debug:2,
             vars: {
-                "globalPath":"template/default",
+                "globalPath":"plugins",
                 "varEmit" : ""
             }
         });
