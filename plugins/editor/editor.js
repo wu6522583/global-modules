@@ -1,6 +1,4 @@
 define(function(require,exports,module){
-
-
     function editor(){
         /*
         * 默认返回百度富文本编辑器

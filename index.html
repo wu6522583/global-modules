@@ -1,8 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
-    <meta charset="utf-8" />
+
+    <meta charset="utf-8">
+    <title>jQuery File Upload Demo</title>
+    <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script src="lib/sea/sea.js"></script>
 
@@ -14,9 +17,9 @@
     </style>
 </head>
 <body>
-<div>
-    <script id="myEditor" type="text/plain" style="width:800px;height:500px"></script>
-</div>
+<!--<div>-->
+    <!--<script id="myEditor" type="text/plain" style="width:800px;height:500px"></script>-->
+<!--</div>-->
 <!--<form class="registerform" action="ajax_post.php"></form>-->
 <!--<div id="aa" class="easyui-accordion" style="width:300px;height:200px;">-->
     <!--<div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">-->
@@ -76,22 +79,65 @@
          <!---->
     <!--</div>-->
 <!--</div>-->
-<div id="dialogaa">
+<!--<input type="text" id="datepicker"></input>-->
 
+<!--<div id="dialogaa"></div>-->
 
-</div>
-
+<!--<div id="div2" style="height: 500px;width: 800px;"></div>-->
+<!--<input id="dd" type="text" class="easyui-datebox" required="required">-->
 
 </body>
 </html>
 
 <script>
     seajs.config({
-        base: "../global-modules/"
+        base: "../global-modules/",
+        debug : 2
     });
     seajs.use("base/engine",function(engine){
         engine.go();
         define(function(require,exports,module){
+
+            var upload = require("upload");
+            upload = new upload();
+            upload.getJQueryFileUpload().done(function(up){
+                var up = new up();
+                up.baseUpload().done(function(html){
+                    seajs.dependentLoad([
+                        "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/style.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css"],function(){
+                        $("body").append(html);
+
+                        seajs.dependentLoad([
+                            "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
+                            "{globalPath}/upload/JQueryFileUpload/css/style.css",
+                            "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
+                            "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
+                            "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.min.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/vendor/jquery.ui.widget.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/tmpl.min.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/load-image.min.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/canvas-to-blob.min.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/bootstrap.min.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.blueimp-gallery.min.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.iframe-transport.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-process.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-image.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-audio.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-video.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-validate.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-ui.js",
+                            "{globalPath}/upload/JQueryFileUpload/js/main.js"]);
+
+                    });
+
+                });
+            });
 //            require("native_plugins/wind-master/bin/dev/wind-all-0.7.3");
 //            var a = eval(Wind.compile("async",
 //                    function () {
@@ -120,11 +166,12 @@
 //                "imageUrl":"1.jpg"
 //            });
 
-//            require("photoshop");
-//            $('#dialogaa').photoshop({
-//                "imageUrl":"1.jpg"
-//            });
-
+            /*
+            require("photoshop");
+            $('#dialogaa').photoshop({
+                "imageUrl":"1.jpg"
+            });
+*/
 
 //            var opt = {
 //                title:'图片编辑',
@@ -152,15 +199,34 @@
 //                "imageUrl":"1.jpg",
 //                url:""
 //            });
+            /*
             var editor = require("editor");
             editor = new editor();
             editor.getUeditor().done(function(){
                 UE.getEditor('myEditor');
             });
+            */
+            /*
+            require("datebox");
 
             require("dialog");
-            $("").dialog
+            var datePicker = require("datePicker");
+            datePicker = new datePicker();
+            datePicker.getMy97DatePicker();
 
+            $("#dialogaa").dialog({
+                width:500,
+                height:500,
+                href:"./1.html",
+                onLoad:function(){
+                    $("#div1").click(function(){
+                        WdatePicker({dateFmt:'yyy/MM/dd'});
+                    });
+                }
+            });
+            */
+//            require("datePicker");
+//            $( "#datepicker" ).datePicker();
 //            require("upload");
 //            $("#upload").html5uploader({
 //                auto:true,

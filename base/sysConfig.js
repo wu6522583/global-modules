@@ -91,7 +91,7 @@ define(function(require,exports,module){
             }
         });
         this.setLanguage("zh_CN");
-        this.setSkin("../../../themes/default/bootstrap");
+        this.setSkin("../../../themes/easyui/bootstrap");
     }
     sysConfig.prototype.addPlugin = function ( name , dir ) {
         if ( isString(name) && isString(dir) ) {

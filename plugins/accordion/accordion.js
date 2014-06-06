@@ -1,6 +1,9 @@
 define(function( require , exports , module ){
-    function accordion(){
-    }
+    /**
+     * 默认 引入 easyui 的 accordion
+     * */
+    require("./easyui/accordion");
+    function accordion(){}
     accordion.prototype.getEasyUI = function(){
         var def = $.Deferred();
         require.async("./easyui/accordion",function(accordion){
@@ -14,7 +17,6 @@ define(function( require , exports , module ){
             def.resolve(accordion);
         });
         return def.promise();
-
     }
     module.exports = accordion;
 });

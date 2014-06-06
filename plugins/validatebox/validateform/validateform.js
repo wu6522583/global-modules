@@ -62,7 +62,6 @@ define([
                     case "password":
                         var password = require("./password");
                         var str = password(_les.settings);
-                        validateStr.push(str);
                         break;
                     case "password_register":
                         var password_register = require("./password_register");

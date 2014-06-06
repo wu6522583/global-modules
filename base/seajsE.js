@@ -5,7 +5,7 @@ define(function(require,exports,module){
     var eax = 0;
     seajs.dependentLoad = function ( _arr , _callback ) {
         var args = arguments;
-        seajs.use( args[0][eax] ,function(){
+        require.async( args[0][eax] ,function(){
             if ( args[0][eax] ) {
                 args.callee(args[0],args[1]);
             } else {
