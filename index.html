@@ -98,46 +98,36 @@
         engine.go();
         define(function(require,exports,module){
 
-//            var upload = require("upload");
-//            upload = new upload();
-//            upload.getJQueryFileUpload().done(function(up){
-//                var up = new up();
-//                up.baseUpload().done(function(html){
-//                    seajs.dependentLoad([
-//                        "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/style.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css"],function(){
-//                        $("body").append(html);
-//
-//                        seajs.dependentLoad([
-//                            "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
-//                            "{globalPath}/upload/JQueryFileUpload/css/style.css",
-//                            "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
-//                            "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
-//                            "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.min.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/vendor/jquery.ui.widget.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/tmpl.min.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/load-image.min.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/canvas-to-blob.min.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/bootstrap.min.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.blueimp-gallery.min.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.iframe-transport.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-process.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-image.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-audio.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-video.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-validate.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-ui.js",
-//                            "{globalPath}/upload/JQueryFileUpload/js/main.js"]);
-//
-//                    });
-//
-//                });
-//            });
+            var upload = require("upload");
+            upload = new upload();
+            upload.getJQueryFileUpload().done(function(up){
+                var up = new up();
+                up.baseUpload().done(function(html){
+                    $("body").append(html);
+                    seajs.dependentLoad([
+                        "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/style.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
+                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.min.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/vendor/jquery.ui.widget.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/tmpl.min.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/load-image.min.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/canvas-to-blob.min.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/bootstrap.min.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.blueimp-gallery.min.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.iframe-transport.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-process.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-image.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-audio.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-video.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-validate.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-ui.js",
+                        "{globalPath}/upload/JQueryFileUpload/js/main.js"]);
+                });
+            });
 //            require("native_plugins/wind-master/bin/dev/wind-all-0.7.3");
 //            var a = eval(Wind.compile("async",
 //                    function () {
@@ -194,15 +184,18 @@
 //            }
 //            data-options=" buttons: '+'#dlg-buttons'+'"
 //            var str = ;
+
+            /*
             require("photoshop");
             $("body").photoshop({
                 "imageUrl":"1.jpg",
                 "width":800,
                 "height":600,
-                url:"aaa.do",
+                 url:"aaa.do",
                 "onSaveSuccess":function(){
                 }
             });
+            */
             /*
             var editor = require("editor");
             editor = new editor();

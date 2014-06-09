@@ -2,12 +2,13 @@ define(function(require,exports,module){
     require("tabs");
     require("slider");
     require("draggable");
+    require("dialog");
     require("./css/photoshop.css");
     require("./css/jquery.Jcrop.css");
     require("./js/jquery.Jcrop");
 
     var _html = '' +
-        '<div id="controlContent" class="easyui-tabs" style="height:100px;width:800px" >' +
+        '<div id="controlContent" class="easyui-tabs" style="height:100px;width:auto" >' +
             '<div title="图像裁剪" >' +
                 '宽度：<input id="clipWidth" maxlength="4" /> 高度：<input id="clipHeight" maxlength="4" /> ' +
             '</div>' +
@@ -76,6 +77,10 @@ define(function(require,exports,module){
                 ctx.drawImage(img, clipAreaO[0], clipAreaO[1], width, height ,0 , 0, width, height);
                 setRootImage(canvasObj.toDataURL("image/png"));
                 _buildCanvas();
+                clipAreaO[0] = 0;
+                clipAreaO[1] = 0;
+                clipAreaO[2] = width;
+                clipAreaO[3] = height;
 //                window.open(canvasObj.toDataURL("image/png"),"smallwin","width=800,height=700");
             }
             $(clipApi).data('Jcrop').release();
@@ -305,9 +310,12 @@ define(function(require,exports,module){
             if ( opts.height ) {
                 dialogHeight = opts.height;
             }
-            $("#dlg").width(dialogWidth);
-            $("#dlg").height(dialogHeight);
-
+            $("#dlg").dialog({
+                width:dialogWidth,
+                height:dialogHeight,
+                onOpen:function(){
+                    if ($(clipApi).data('Jcrop')) {$(clipApi).data('Jcrop').focus();}
+                }});
             $("#controlContent").tabs({
                 tabWidth : "152px",
                 onSelect : function ( tit , _index ) {
@@ -354,11 +362,15 @@ define(function(require,exports,module){
             });
             setRootImage();
             _buildCanvas();
-            $("#changeFile").change(function(){
-                readLocalFileI(arguments[0].currentTarget.files[0]).done(function(IO){
+            $("#changeFile").change(function( _fi ){
+                var _files = _fi;
+                readLocalFileI(_files.currentTarget.files[0]).done(function(IO){
+                    _files = null;
                     var imgObj = new Image();
                     imgObj.src = IO;
-                    addImageWatermark(imgObj);
+                    imgObj.onload = function(){
+                        addImageWatermark(imgObj);
+                    }
                 });
             });
             $("#dlg-buttons").delegate("a","click",function( ev ){
@@ -381,6 +393,8 @@ define(function(require,exports,module){
                         break;
                 }
             });
+
+
         }
         function readLocalFileI (fileObj ) {
             var def = $.Deferred();
