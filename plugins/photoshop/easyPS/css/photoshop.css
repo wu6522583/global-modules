@@ -1,0 +1,15 @@
+canvas{
+    position: absolute;
+    left: 0px;
+    top:0px;
+    border:dashed 2px #CCC;
+    visibility: hidden;
+}
+#controlContent{
+    position: relative;
+    z-index: 10000000000000000;
+    overflow: hidden;
+}
+#divEditImage{
+    position: relative;
+}
