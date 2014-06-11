@@ -10,8 +10,13 @@ define(function( require , exports , module  ){
     }
     upload.prototype.getJQueryFileUpload = function () {
         var def = $.Deferred();
-        require.async("./JQueryFileUpload/JQueryFileUpload",function(up){
-            def.resolve(up);
+        require.async("./JQueryFileUpload/IAT",function( iat ){
+            var iat = new iat();
+            iat.load(function(){
+                require.async("./JQueryFileUpload/JQueryFileUpLoad",function(  ){
+                    def.resolve();
+                });
+            });
         });
         return def.promise();
     }

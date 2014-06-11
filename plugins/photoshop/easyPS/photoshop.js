@@ -313,6 +313,7 @@ define(function(require,exports,module){
             $("#dlg").dialog({
                 width:dialogWidth,
                 height:dialogHeight,
+                closable:false,
                 onOpen:function(){
                     if ($(clipApi).data('Jcrop')) {$(clipApi).data('Jcrop').focus();}
                 }});
@@ -389,7 +390,7 @@ define(function(require,exports,module){
                         createImageFile();
                         break;
                     case "关闭":
-                        $("#dlg").dialog('close');
+                        $("#dlg").dialog('destroy');
                         break;
                 }
             });

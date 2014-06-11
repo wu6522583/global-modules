@@ -85,10 +85,9 @@
 
 <!--<div id="div2" style="height: 500px;width: 800px;"></div>-->
 <!--<input id="dd" type="text" class="easyui-datebox" required="required">-->
-
+<div id="upupload"></div>
 </body>
 </html>
-
 <script>
     seajs.config({
         base: "../global-modules/",
@@ -100,34 +99,39 @@
 
             var upload = require("upload");
             upload = new upload();
+
             upload.getJQueryFileUpload().done(function(up){
-                var up = new up();
-                up.baseUpload().done(function(html){
-                    $("body").append(html);
-                    seajs.dependentLoad([
-                        "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
-                        "{globalPath}/upload/JQueryFileUpload/css/style.css",
-                        "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
-                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
-                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.min.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/vendor/jquery.ui.widget.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/tmpl.min.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/load-image.min.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/canvas-to-blob.min.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/bootstrap.min.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.blueimp-gallery.min.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.iframe-transport.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-process.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-image.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-audio.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-video.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-validate.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-ui.js",
-                        "{globalPath}/upload/JQueryFileUpload/js/main.js"]);
-                });
+                $("#upupload").JQueryFileUpLoad();
+//                var up = new up();
+//                up.baseUpload().done(function(html){
+//                    $("#upupload").append(html);
+//                    seajs.dependentLoad([
+//                        "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
+//                        "{globalPath}/upload/JQueryFileUpload/css/style.css",
+//                        "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
+//                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
+//                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.min.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/vendor/jquery.ui.widget.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/tmpl.min.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/load-image.min.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/canvas-to-blob.min.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/bootstrap.min.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.blueimp-gallery.min.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.iframe-transport.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-process.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-image.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-audio.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-video.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-validate.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-ui.js",
+//                        "{globalPath}/upload/JQueryFileUpload/js/main.js"]);
+//                });
             });
+
+
+
 //            require("native_plugins/wind-master/bin/dev/wind-all-0.7.3");
 //            var a = eval(Wind.compile("async",
 //                    function () {
@@ -184,17 +188,34 @@
 //            }
 //            data-options=" buttons: '+'#dlg-buttons'+'"
 //            var str = ;
-
             /*
             require("photoshop");
-            $("body").photoshop({
-                "imageUrl":"1.jpg",
-                "width":800,
-                "height":600,
-                 url:"aaa.do",
-                "onSaveSuccess":function(){
-                }
+            $("#uplo").change(function(_fi){
+                var file = _fi;
+                readLocalFileI(file.currentTarget.files[0]).done(function(x){
+                    file = null;
+                    $("body").photoshop({
+                        "imageUrl":x,
+                        "width":800,
+                        "height":600,
+                        url:"aaa.do",
+                        "onSaveSuccess":function(){
+                        }
+                    });
+                });
             });
+
+            function readLocalFileI (fileObj ) {
+                var def = $.Deferred();
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    def.resolve(e.currentTarget.result);
+                }
+                reader.onprogress = function(e){}
+                reader.onloadend = function(e){}
+                reader.readAsDataURL(fileObj);
+                return def.promise();
+            }
             */
             /*
             var editor = require("editor");
