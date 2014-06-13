@@ -9,6 +9,7 @@ define(function(require,exports,module){
             if ( args[0][eax] ) {
                 args.callee(args[0],args[1]);
             } else {
+                eax = 0;
                 if( !args[1] ) return;
                 args[1]();
             }
