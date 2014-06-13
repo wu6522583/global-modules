@@ -235,8 +235,12 @@ define(function(require,exports,module){
                 url: opts.url,
                 data: {files:b64}
             }).success(function(_data) {
+                initSomeThing();
                 opts.onSaveSuccess(_data);
             });
+        }
+        function initSomeThing(){
+            canvasObj = null;
         }
         function createImageFile () {
             var self = this;
