@@ -1,5 +1,4 @@
 define(function( require , exports , module  ){
-//    require("./html5Upload/upload");
     function upload(){}
     upload.prototype.getHtml5Upload = function(){
         var def = $.Deferred();
@@ -8,14 +7,12 @@ define(function( require , exports , module  ){
         });
         return def.promise();
     }
-    upload.prototype.getJQueryFileUpload = function () {
+    upload.prototype.getDropZone = function () {
         var def = $.Deferred();
-        require.async("./JQueryFileUpload/IAT",function( iat ){
-            var iat = new iat();
-            iat.load(function(){
-                require.async("./JQueryFileUpload/JQueryFileUpLoad",function(  ){
-                    def.resolve();
-                });
+        require.async("./dropzone/dropzone",function( dz ){
+            var dropzone = new dz();
+            dropzone.load().done(function(){
+                def.resolve();
             });
         });
         return def.promise();
