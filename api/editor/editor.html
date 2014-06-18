@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<DIV>
+    <script id="myEditor" style="width:800px; height:300px;"></script>
+</DIV>
+<script>
+    seajs.use("./editor/editor");
+</script>
+<pre>
+    <p>HTML</p>
+    <DIV>
+        <span><</span><span>script id="myEditor" style="width:800px; height:300px;"></</span><span>script></span>
+    </DIV>
+    <p>JS</p>
+    var editor = require("editor");
+    editor = new editor();
+    editor.getUeditor().done(function(){
+        UE.getEditor('myEditor');
+    });
+</pre>
+</body>
+</html>

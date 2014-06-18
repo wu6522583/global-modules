@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="padding:10px">
+
+    <h3>Tooltip</h3>
+    <p>Override defaults with $.fn.tooltip.defaults.</p>
+    <p>
+        When a user move the mouse pointer over an element, a tooltip message window appears to display additional information.
+        The tooltip content can contain any html elements that come from the page or via ajax.
+    </p>
+    <img src="images/tooltip.png">
+
+    <h4>Usage Example</h4>
+    <h5>Create Tooltip</h5>
+    <p>1. Create tooltip from markup, add 'easyui-tooltip' class to the element, no javascript code is needed.</p>
+    <pre name="code" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><span class="tag">&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#"</span><span class="pln"> </span><span class="atn">title</span><span class="pun">=</span><span class="atv">"This is the tooltip message."</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"easyui-tooltip"</span><span class="tag">&gt;</span><span class="pln">Hover me</span><span class="tag">&lt;/a&gt;</span></li></ol></pre>
+    <p>2. Create tooltip using javascript.</p>
+    <pre name="code" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><span class="tag">&lt;a</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"dd"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"javascript:void(0)"</span><span class="tag">&gt;</span><span class="pln">Click here</span><span class="tag">&lt;/a&gt;</span></li></ol></pre>
+    <pre name="code" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#dd'</span><span class="pun">).</span><span class="pln">tooltip</span><span class="pun">({</span></li><li class="L1"><span class="pln">    position</span><span class="pun">:</span><span class="pln"> </span><span class="str">'right'</span><span class="pun">,</span></li><li class="L2"><span class="pln">    content</span><span class="pun">:</span><span class="pln"> </span><span class="str">'&lt;span style="color:#fff"&gt;This is the tooltip message.&lt;/span&gt;'</span><span class="pun">,</span></li><li class="L3"><span class="pln">    onShow</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(){</span></li><li class="L4"><span class="pln">        $</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">).</span><span class="pln">tooltip</span><span class="pun">(</span><span class="str">'tip'</span><span class="pun">).</span><span class="pln">css</span><span class="pun">({</span></li><li class="L5"><span class="pln">            backgroundColor</span><span class="pun">:</span><span class="pln"> </span><span class="str">'#666'</span><span class="pun">,</span></li><li class="L6"><span class="pln">            borderColor</span><span class="pun">:</span><span class="pln"> </span><span class="str">'#666'</span></li><li class="L7"><span class="pln">        </span><span class="pun">});</span></li><li class="L8"><span class="pln">    </span><span class="pun">}</span></li><li class="L9"><span class="pun">});</span></li></ol></pre>
+
+    <h4>Properties</h4>
+    <table class="doc-table">
+        <tbody><tr>
+            <th><strong>Name</strong></th>
+            <th><strong>Type</strong></th>
+            <th><strong>Description</strong></th>
+            <th><strong>Default</strong></th>
+        </tr>
+        <tr>
+            <td>position</td>
+            <td>string</td>
+            <td>The tooltip position. Possible values are: 'left','right','top','bottom'.</td>
+            <td>bottom</td>
+        </tr>
+        <tr>
+            <td>content</td>
+            <td>string</td>
+            <td>The tooltip content.</td>
+            <td>null</td>
+        </tr>
+        <tr>
+            <td>trackMouse</td>
+            <td>boolean</td>
+            <td>True to make tooltip move along with the mouse.</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>deltaX</td>
+            <td>number</td>
+            <td>The horizontal distance from the tooltip position.</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>deltaY</td>
+            <td>number</td>
+            <td>The vertical distance from the tooltip position.</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>showEvent</td>
+            <td>string</td>
+            <td>The event that cause the tooltip to appear.</td>
+            <td>mouseenter</td>
+        </tr>
+        <tr>
+            <td>hideEvent</td>
+            <td>string</td>
+            <td>The event that cause the tooltip to disappear.</td>
+            <td>mouseleave</td>
+        </tr>
+        <tr>
+            <td>showDelay</td>
+            <td>number</td>
+            <td>The time delay to show tooltip.</td>
+            <td>200</td>
+        </tr>
+        <tr>
+            <td>hideDelay</td>
+            <td>number</td>
+            <td>The time delay to hide tooltip.</td>
+            <td>100</td>
+        </tr>
+        </tbody></table>
+
+    <h4>Events</h4>
+    <table class="doc-table">
+        <tbody><tr>
+            <th><strong>Name</strong></th>
+            <th><strong>Parameters</strong></th>
+            <th><strong>Description</strong></th>
+        </tr>
+        <tr>
+            <td>onShow</td>
+            <td>e</td>
+            <td>Fires when show tooltip.</td>
+        </tr>
+        <tr>
+            <td>onHide</td>
+            <td>e</td>
+            <td>Fires when hide tooltip.</td>
+        </tr>
+        <tr>
+            <td>onUpdate</td>
+            <td>content</td>
+            <td>Fires when tooltip content is updated.</td>
+        </tr>
+        <tr>
+            <td>onPosition</td>
+            <td>left,top</td>
+            <td>Fires when tooltip position is changed.</td>
+        </tr>
+        <tr>
+            <td>onDestroy</td>
+            <td>none</td>
+            <td>Fires when tooltip is destroyed.</td>
+        </tr>
+        </tbody></table>
+
+    <h4>Methods</h4>
+    <table class="doc-table">
+        <tbody><tr>
+            <th><strong>Name</strong></th>
+            <th><strong>Parameter</strong></th>
+            <th><strong>Description</strong></th>
+        </tr>
+        <tr>
+            <td>options</td>
+            <td>none</td>
+            <td>Return the options property.</td>
+        </tr>
+        <tr>
+            <td>tip</td>
+            <td>none</td>
+            <td>Return the tip object.</td>
+        </tr>
+        <tr>
+            <td>arrow</td>
+            <td>none</td>
+            <td>Return the arrow object.</td>
+        </tr>
+        <tr>
+            <td>show</td>
+            <td>e</td>
+            <td>Display the tooltip.</td>
+        </tr>
+        <tr>
+            <td>hide</td>
+            <td>e</td>
+            <td>Hide the tooltip.</td>
+        </tr>
+        <tr>
+            <td>update</td>
+            <td>content</td>
+            <td>Update the tooltip content.</td>
+        </tr>
+        <tr>
+            <td>reposition</td>
+            <td>none</td>
+            <td>Reset the tooltip position.</td>
+        </tr>
+        <tr>
+            <td>destroy</td>
+            <td>none</td>
+            <td>Destroy the tooltip.</td>
+        </tr>
+        </tbody></table>
+</div>
+<h2>Ajax Tooltip</h2>
+<div class="demo-info">
+    <div class="demo-tip icon-tip"></div>
+    <div>The tooltip content can be loaded via AJAX.</div>
+</div>
+<div style="margin:10px 0;"></div>
+<a href="#" class="easyui-tooltip" data-options="
+			content: $('<div></div>'),
+			onShow: function(){
+				$(this).tooltip('arrow').css('left', 20);
+				$(this).tooltip('tip').css('left', $(this).offset().left);
+			},
+			onUpdate: function(cc){
+				cc.panel({
+					width: 500,
+					height: 'auto',
+					border: false,
+					href: './tooltip/easyui/_content.html'
+				});
+			}
+		">Hove me</a> to display tooltip content via AJAX.
+
+<h2>Basic Tooltip</h2>
+<div class="demo-info">
+    <div class="demo-tip icon-tip"></div>
+    <div>Hover the links to display tooltip message.</div>
+</div>
+<div style="margin:10px 0;"></div>
+<p>The tooltip can use each elements title attribute.
+    <a href="#" title="This is the tooltip message." class="easyui-tooltip">Hover me</a> to display tooltip.
+</p>
+
+<h2>Custom Tooltip Content</h2>
+<div class="demo-info">
+    <div class="demo-tip icon-tip"></div>
+    <div>Access to each elements attribute to get the tooltip content.</div>
+</div>
+<div style="margin:10px 0;"></div>
+<div id="pg" data-options="total:114" style="border:1px solid #ddd;"></div>
+
+<script>
+    $(function(){
+        $('#pg').pagination().find('a.l-btn').tooltip({
+            content: function(){
+                var cc = $(this).find('span.l-btn-empty').attr('class').split(' ');
+                var icon = cc[1].split('-')[1];
+                return icon + ' page';
+            }
+        });
+    });
+</script>
+
+<h2>Custom Tooltip Style</h2>
+<div class="demo-info">
+    <div class="demo-tip icon-tip"></div>
+    <div>This sample shows how to change the tooltip style.</div>
+</div>
+<div style="margin:10px 0;"></div>
+<div style="padding:10px 200px">
+    <div id="pp1" class="easyui-panel" style="width:100px;padding:5px">Hover Me</div>
+</div>
+<div style="padding:10px 200px">
+    <div id="pp2" class="easyui-panel" style="width:100px;padding:5px">Hover Me</div>
+</div>
+<script>
+    $(function(){
+        $('#pp1').tooltip({
+            position: 'right',
+            content: '<span style="color:#fff">This is the tooltip message.</span>',
+            onShow: function(){
+                $(this).tooltip('tip').css({
+                    backgroundColor: '#666',
+                    borderColor: '#666'
+                });
+            }
+        });
+        $('#pp2').tooltip({
+            position: 'bottom',
+            content: '<div style="padding:5px;background:#eee;color:#000">This is the tooltip message.</div>',
+            onShow: function(){
+                $(this).tooltip('tip').css({
+                    backgroundColor: '#fff000',
+                    borderColor: '#ff0000',
+                    boxShadow: '1px 1px 3px #292929'
+                });
+            },
+            onPosition: function(){
+                $(this).tooltip('tip').css('left', $(this).offset().left);
+                $(this).tooltip('arrow').css('left', 20);
+            }
+        });
+    });
+</script>
+
+<h2>Tooltip Position</h2>
+<div class="demo-info">
+    <div class="demo-tip icon-tip"></div>
+    <div>Click the drop-down list below to change where the tooltip appears.</div>
+</div>
+<div style="margin:10px 0;"></div>
+<span>Select position:</span>
+<select onchange="changePosition(this.value)">
+    <option value="bottom">Bottom</option>
+    <option value="top">Top</option>
+    <option value="left">Left</option>
+    <option value="right">Right</option>
+</select>
+<div style="padding:10px 200px">
+    <div id="pp" class="easyui-panel easyui-tooltip" title="This is the tooltip message." style="width:100px;padding:5px">Hover Me</div>
+</div>
+<script type="text/javascript">
+    function changePosition(pos){
+        $('#pp').tooltip({
+            position: pos
+        });
+    }
+</script>
+
+<h2>Tooltip as Toolbar</h2>
+<div class="demo-info">
+    <div class="demo-tip icon-tip"></div>
+    <div>This sample shows how to create a tooltip style toolbar.</div>
+</div>
+<div style="margin:10px 0;"></div>
+<div style="padding:10px 200px">
+    <p><a id="dd" href="javascript:void(0)" class="easyui-tooltip" data-options="
+					hideEvent: 'none',
+					content: function(){
+						return $('#toolbar');
+					},
+					onShow: function(){
+						var t = $(this);
+						t.tooltip('tip').focus().unbind().bind('blur',function(){
+							t.tooltip('hide');
+						});
+					}
+				">Hover me</a> to display toolbar.</p>
+</div>
+<div style="display:none">
+    <div id="toolbar">
+        <a href="#" class="easyui-linkbutton easyui-tooltip" title="Add" data-options="iconCls:'icon-add',plain:true"></a>
+        <a href="#" class="easyui-linkbutton easyui-tooltip" title="Cut" data-options="iconCls:'icon-cut',plain:true"></a>
+        <a href="#" class="easyui-linkbutton easyui-tooltip" title="Remove" data-options="iconCls:'icon-remove',plain:true"></a>
+        <a href="#" class="easyui-linkbutton easyui-tooltip" title="Undo" data-options="iconCls:'icon-undo',plain:true"></a>
+        <a href="#" class="easyui-linkbutton easyui-tooltip" title="Redo" data-options="iconCls:'icon-redo',plain:true"></a>
+    </div>
+</div>
+
+<h2>Tooltip Dialog</h2>
+<div class="demo-info">
+    <div class="demo-tip icon-tip"></div>
+    <div>This sample shows how to create a tooltip dialog.</div>
+</div>
+<div style="margin:10px 0;"></div>
+<div style="padding:10px 200px">
+    <p><a id="dd" href="javascript:void(0)">Click here</a> to see the tooltip dialog.
+</div>
+<script>
+    $(function(){
+        $('#dd').tooltip({
+            content: $('<div></div>'),
+            showEvent: 'click',
+            onUpdate: function(content){
+                content.panel({
+                    width: 200,
+                    border: false,
+                    title: 'Login',
+                    href: './tooltip/easyui/_dialog.html'
+                });
+            },
+            onShow: function(){
+                var t = $(this);
+                t.tooltip('tip').unbind().bind('mouseenter', function(){
+                    t.tooltip('show');
+                }).bind('mouseleave', function(){
+                    t.tooltip('hide');
+                });
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>

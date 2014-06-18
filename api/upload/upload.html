@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form style="width: 800px;height: 300px;" class="dropzone" id="myUpload"></form>
+<script>seajs.use("./upload/dropzone");</script>
+<pre>
+    <h2>HTML</h2>
+    <span><</span><span>form style="width: 800px;height: 300px;" class="dropzone" id="myUpload"><</span><span>/form></span>
+    <h2>JS</h2>
+    define(function(require,exports,module){
+        var upload = require("upload");
+        upload = new upload();
+        upload.getDropZone();
+        $("#myUpload").dropzone({url:"156.do"});
+    });
+</pre>
+<a href="http://www.dropzonejs.com/">dropzone 具体参数，请参考dropzone 官方网站。</a>
+</body>
+</html>

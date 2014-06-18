@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="mainwrap" style="padding: 0px 100px 100px 100px">
+    <div id="content">
+        <div style="padding:10px">
+            <h3>Slider</h3>
+            <p>Override defaults with $.fn.slider.defaults.</p>
+            <p> The slider enables the user to choose a numeric value from a finite range. When moving the thumb control along the track, a tip will display to represent the current value. The user can customize slider by setting its properties. </p>
+            <h4>依赖</h4>
+            <ul>
+                <li>draggable</li>
+            </ul>
+            <h4>用法示例</h4>
+            <p> When using as a form field, create slider from &lt;input&gt; markup. </p>
+            <pre name="code" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><span class="http://jeasyui.com/prettify/lang-in.tag">&lt;input class="easyui-slider" value="12"  style="width:300px"</span></li><li class="L1"><span class="http://jeasyui.com/prettify/lang-in.tag">        data-options="showTip:true,rule:[0,'|',25,'|',50,'|',75,'|',100]"&gt;</span></li></ol></pre>
+            <p> Create slider from &lt;div/&gt; is also allowed but the 'value' attribute is invalid. </p>
+            <pre name="code" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><span class="http://jeasyui.com/prettify/lang-in.tag">&lt;div class="easyui-slider" data-options="min:10,max:90,step:10" style="width:300px"&gt;</span><span class="pln">&lt;/div</span></li></ol></pre>
+            <p>Create slider programatically.</p>
+            <pre name="code" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><span class="http://jeasyui.com/prettify/lang-in.tag">&lt;div id="ss" style="height:200px"&gt;</span><span class="pln">&lt;/div</span></li></ol></pre>
+            <pre name="code" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#ss'</span><span class="pun">).</span><span class="pln">slider</span><span class="pun">({</span></li><li class="L1"><span class="pln">    mode</span><span class="pun">:</span><span class="pln"> </span><span class="str">'v'</span><span class="pun">,</span></li><li class="L2"><span class="pln">    tipFormatter</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">value</span><span class="pun">){</span></li><li class="L3"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> value </span><span class="pun">+</span><span class="pln"> </span><span class="str">'%'</span><span class="pun">;</span></li><li class="L4"><span class="pln">    </span><span class="pun">}</span></li><li class="L5"><span class="pun">});</span></li></ol></pre>
+            <h4>属性</h4>
+            <table class="doc-table">
+                <tbody>
+                <tr>
+                    <th><strong>名称</strong></th>
+                    <th><strong>类型</strong></th>
+                    <th><strong>描述</strong></th>
+                    <th><strong>默认值</strong></th>
+                </tr>
+                <tr>
+                    <td>width</td>
+                    <td>number</td>
+                    <td>The width of slider.</td>
+                    <td>auto</td>
+                </tr>
+                <tr>
+                    <td>height</td>
+                    <td>number</td>
+                    <td>The height of slider.</td>
+                    <td>auto</td>
+                </tr>
+                <tr>
+                    <td>mode</td>
+                    <td>string</td>
+                    <td>Indicate what type of slider. Possible values: 'h'(horizontal),'v'(vertical).</td>
+                    <td>h</td>
+                </tr>
+                <tr>
+                    <td>reversed</td>
+                    <td>boolean</td>
+                    <td> Set to true the minimum value and maximum value will switch their positions. This property is available since version 1.3.2. </td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td>showTip</td>
+                    <td>boolean</td>
+                    <td>Defines if to display value information tip.</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td>disabled</td>
+                    <td>boolean</td>
+                    <td>Defines if to disable slider.</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>number</td>
+                    <td>The default value.</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>min</td>
+                    <td>number</td>
+                    <td>The minimum allowed value.</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>max</td>
+                    <td>number</td>
+                    <td>The maximum allowed value.</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>step</td>
+                    <td>number</td>
+                    <td>The value to increase or descrease.</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>rule</td>
+                    <td>array</td>
+                    <td>Display labels beside slider, '|' — show just line.</td>
+                    <td>[]</td>
+                </tr>
+                <tr>
+                    <td>tipFormatter</td>
+                    <td>function</td>
+                    <td>A function to format slider value. Return string value that will display as tip.</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>事件</h4>
+            <table class="doc-table">
+                <tbody>
+                <tr>
+                    <th><strong>名称</strong></th>
+                    <th><strong>参数列表</strong></th>
+                    <th><strong>描述</strong></th>
+                </tr>
+                <tr>
+                    <td>onChange</td>
+                    <td>newValue,oldValue</td>
+                    <td>Fires when the field value is changed.</td>
+                </tr>
+                <tr>
+                    <td>onSlideStart</td>
+                    <td>value</td>
+                    <td>Fires when begin to drag slider.</td>
+                </tr>
+                <tr>
+                    <td>onSlideEnd</td>
+                    <td>value</td>
+                    <td>Fires when end to drag slider.</td>
+                </tr>
+                <tr>
+                    <td>onComplete</td>
+                    <td>value</td>
+                    <td> Fires when the slider value is changed by user, no matter dragged or clicked the slider. This event is available since version 1.3.4. </td>
+                </tr>
+                </tbody>
+            </table>
+            <h4>方法</h4>
+            <table class="doc-table">
+                <tbody>
+                <tr>
+                    <th><strong>名称</strong></th>
+                    <th><strong>参数</strong></th>
+                    <th><strong>描述</strong></th>
+                </tr>
+                <tr>
+                    <td>options</td>
+                    <td>none</td>
+                    <td>Return the slider options.</td>
+                </tr>
+                <tr>
+                    <td>destroy</td>
+                    <td>none</td>
+                    <td>Destroy the slider object.</td>
+                </tr>
+                <tr>
+                    <td>resize</td>
+                    <td>param</td>
+                    <td> Set slider size. The 'param' parameter contains following properties:<br> width: the new slider width<br> height: the new slider height </td>
+                </tr>
+                <tr>
+                    <td>getValue</td>
+                    <td>none</td>
+                    <td>Get slider value.</td>
+                </tr>
+                <tr>
+                    <td>setValue</td>
+                    <td>value</td>
+                    <td>Set slider value.</td>
+                </tr>
+                <tr>
+                    <td>enable</td>
+                    <td>none</td>
+                    <td>Enable the slider component.</td>
+                </tr>
+                <tr>
+                    <td>disable</td>
+                    <td>none</td>
+                    <td>Disable the slider component.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div> ﻿
+    </div>
+
+    <h2>Basic Slider</h2>
+    <div class="demo-info">
+        <div class="demo-tip icon-tip"></div>
+        <div>Drag the slider to change value.</div>
+    </div>
+    <div style="margin:10px 0;"></div>
+    <div style="margin-top:20px;">
+        <input class="easyui-slider" style="width:300px" data-options="showTip:true">
+    </div>
+
+    <h2>Format Tip Information</h2>
+    <div class="demo-info">
+        <div class="demo-tip icon-tip"></div>
+        <div>This sample shows how to format tip information.</div>
+    </div>
+    <div style="margin:10px 0;"></div>
+    <div style="margin-top:20px;">
+        <input class="easyui-slider" value="12" style="width:300px" data-options="
+				showTip: true,
+				rule: [0,'|',25,'|',50,'|',75,'|',100],
+				tipFormatter: function(value){
+					return value+'px';
+				},
+				onChange: function(value){
+					$('#ff').css('font-size', value);
+				}">
+    </div>
+    <div id="ff" style="margin-top:50px;font-size:12px">jQuery EasyUI</div>
+
+
+    <h2>Slider Rule</h2>
+    <div class="demo-info">
+        <div class="demo-tip icon-tip"></div>
+        <div>This sample shows how to define slider rule.</div>
+    </div>
+    <div style="margin:10px 0;"></div>
+    <div style="margin-top:20px;">
+        <input class="easyui-slider" style="width:300px" data-options="
+					showTip:true,
+					rule: [0,'|',25,'|',50,'|',75,'|',100]
+				">
+    </div>
+
+    <h2>Vertical Slider</h2>
+    <div class="demo-info">
+        <div class="demo-tip icon-tip"></div>
+        <div>This sample shows how to create a vertical slider.</div>
+    </div>
+    <div style="margin:10px 0;"></div>
+    <input class="easyui-slider" style="height:300px" data-options="
+				showTip: true,
+				mode: 'v',
+				reversed: false,
+				rule: [0,'|',25,'|',50,'|',75,'|',100]
+			">
+
+</div>
+
+</body>
+</html>

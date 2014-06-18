@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="cnblogs_post_body" style="padding:0px 100px 100px 100px"><h3><span style="font-family: 'Arial','sans-serif'">　　　ProgressBar</span><span style="font-family: 'Arial','sans-serif'">&nbsp;</span><span style="font-family: 宋体">进度条</span></h3>
+    <h3><span style="font-family: 宋体"></span><span style="font-family: 'Arial','sans-serif'"><span style="font-family: 'Arial', 'sans-serif'"><span style="font-family: 'Arial', 'sans-serif'"></span></span></span></h3>
+    <div style="text-align: left; margin: 9pt 0cm 9pt 42pt"><span style="font-family: 宋体; font-size: 10pt"><a style="color: #008000" href="http://www.cnblogs.com/philoo"><span style="font-family: 宋体; font-size: 10pt">风流涕淌</span></a>&nbsp;翻译。不当之处，敬请指正。转载请保留出处！</span></div>
+    <h3 style="text-align: left; margin: 9pt 0cm 9pt 42pt"><span style="font-family: 宋体; font-size: 10pt"></span>&nbsp;</h3>
+    <div><span style="font-family: 宋体; font-size: 9pt">用</span><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">$.fn.progressbar.defaults</span><span style="font-family: 宋体; font-size: 9pt">重写</span><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">defaults</span><span style="font-family: 宋体; font-size: 9pt">。</span></div>
+    <p><span style="font-family: 宋体; font-size: 9pt"></span>&nbsp;</p>
+    <p><span style="font-family: 宋体; font-size: 9pt"><img border="0" alt="" src="http://images.cnblogs.com/cnblogs_com/philoo/jeasyui_progressbar.png" width="406" height="26"></span></p>
+    <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt"></span></p>
+    <h4><span style="font-family: 宋体">依赖</span></h4>
+    <ul type="disc"><li style="text-align: left"><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">none</span></li></ul>
+    <h4><span style="font-family: 宋体">用法示例</span></h4>
+    <p style="text-align: left; margin: 3.75pt 0cm" align="left"><strong><span style="font-family: 宋体; color: #990000">创建</span></strong><strong><span style="font-family: 'Arial','sans-serif'; color: #990000">ProgressBar</span></strong></p>
+    <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">ProgressBar</span><span style="font-family: 宋体; font-size: 9pt">能够从</span><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">html</span><span style="font-family: 宋体; font-size: 9pt">标记创建或者编程创建。从标记创建更容易些，把</span> <span style="font-family: 'Arial','sans-serif'; font-size: 9pt">'easyui-progressbar' </span><span style="font-family: 宋体; font-size: 9pt">类加入到</span><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">&lt;div/&gt;</span><span style="font-family: 宋体; font-size: 9pt">标记。</span></p>
+    <div style="border-bottom: #d1d7dc 1pt solid; border-left: #d1d7dc 1pt solid; padding-bottom: 2pt; padding-left: 8pt; padding-right: 0cm;background: white; margin-left: 10.5pt; border-top: #d1d7dc 1pt solid; margin-right: 0cm; border-right: #d1d7dc 1pt solid; padding-top: 2pt">
+        <p style="border-bottom: medium none; text-align: left; border-left: medium none; padding-bottom: 0cm; line-height: 13.5pt; text-indent: -18pt; margin: 0cm 0cm 0pt 18pt; padding-left: 0cm; padding-right: 0cm;background: white; word-break: break-all; border-top: medium none; border-right: medium none; padding-top: 0cm" align="left"><span style="font-family: Consolas; color: #2b91af; font-size: 9pt">1.&nbsp;</span><strong><span style="font-family: Consolas; font-size: 9pt">&lt;</span><span style="font-family: Consolas; font-size: 9pt">div</span></strong>&nbsp;<span style="font-family: Consolas; font-size: 9pt">id</span><span style="font-family: Consolas; color: black; font-size: 9pt">=</span><span style="font-family: Consolas; font-size: 9pt">"p"</span>&nbsp;<span style="font-family: Consolas; font-size: 9pt">class</span><span style="font-family: Consolas; color: black; font-size: 9pt">=</span><span style="font-family: Consolas; font-size: 9pt">"easyui-progressbar"</span>&nbsp;<span style="font-family: Consolas; font-size: 9pt">style</span><span style="font-family: Consolas; color: black; font-size: 9pt">=</span><span style="font-family: Consolas; font-size: 9pt">"width:400px;"</span><strong><span style="font-family: Consolas; font-size: 9pt">&gt;&lt;/</span><span style="font-family: Consolas; font-size: 9pt">div</span><span style="font-family: Consolas; font-size: 9pt">&gt;</span></strong><span style="font-family: Consolas; color: black; font-size: 9pt">&nbsp;&nbsp;</span></p></div>
+    <p>&nbsp;</p>
+    <p style="text-align: left; margin: 3.75pt 0cm" align="left"><strong><span style="font-family: 宋体; color: #990000">获取或者设置值</span></strong><strong></strong></p>
+    <p><span style="font-family: 宋体; font-size: 9pt">我们获取当前值并且给这个组件设置一个新值。</span></p>
+    <div style="border-bottom: #d1d7dc 1pt solid; border-left: #d1d7dc 1pt solid; padding-bottom: 2pt; padding-left: 8pt; padding-right: 0cm;background: white; margin-left: 10.5pt; border-top: #d1d7dc 1pt solid; margin-right: 0cm; border-right: #d1d7dc 1pt solid; padding-top: 2pt">
+        <p style="border-bottom: medium none; text-align: left; border-left: medium none; padding-bottom: 0cm; line-height: 13.5pt; text-indent: -18pt; margin: 0cm 0cm 0pt 18pt; padding-left: 0cm; padding-right: 0cm;background: white; word-break: break-all; border-top: medium none; border-right: medium none; padding-top: 0cm" align="left"><span style="font-family: Consolas; color: #2b91af; font-size: 9pt">1.&nbsp;</span><span style="font-family: Consolas; font-size: 9pt"><strong>var</strong></span><span style="font-family: Consolas; color: black; font-size: 9pt">&nbsp;value&nbsp;=&nbsp;$(</span><span style="font-family: Consolas; font-size: 9pt">'#p'</span><span style="font-family: Consolas; color: black; font-size: 9pt">).progressbar(</span><span style="font-family: Consolas; font-size: 9pt">'getValue'</span><span style="font-family: Consolas; color: black; font-size: 9pt">); &nbsp;&nbsp;</span></p>
+        <p style="border-bottom: medium none; text-align: left; border-left: medium none; padding-bottom: 0cm; line-height: 13.5pt; text-indent: -18pt; margin: 0cm 0cm 0pt 18pt; padding-left: 0cm; padding-right: 0cm;background: white; word-break: break-all; border-top: medium none; border-right: medium none; padding-top: 0cm" align="left"><span style="font-family: Consolas; color: #2b91af; font-size: 9pt">2.&nbsp;</span><span style="font-family: Consolas; font-size: 9pt"><strong>if</strong></span><span style="font-family: Consolas; color: black; font-size: 9pt">&nbsp;(value&nbsp;&lt;&nbsp;100){ &nbsp;&nbsp;</span></p>
+        <p style="border-bottom: medium none; text-align: left; border-left: medium none; padding-bottom: 0cm; line-height: 13.5pt; text-indent: -18pt; margin: 0cm 0cm 0pt 18pt; padding-left: 0cm; padding-right: 0cm;background: white; word-break: break-all; border-top: medium none; border-right: medium none; padding-top: 0cm" align="left"><span style="font-family: Consolas; color: #2b91af; font-size: 9pt">3.&nbsp;</span><span style="font-family: Consolas; color: black; font-size: 9pt">&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;+=&nbsp;Math.floor(Math.random()&nbsp;*&nbsp;10); &nbsp;&nbsp;</span></p>
+        <p style="border-bottom: medium none; text-align: left; border-left: medium none; padding-bottom: 0cm; line-height: 13.5pt; text-indent: -18pt; margin: 0cm 0cm 0pt 18pt; padding-left: 0cm; padding-right: 0cm;background: white; word-break: break-all; border-top: medium none; border-right: medium none; padding-top: 0cm" align="left"><span style="font-family: Consolas; color: #2b91af; font-size: 9pt">4.&nbsp;</span><span style="font-family: Consolas; color: black; font-size: 9pt">&nbsp;&nbsp;&nbsp;&nbsp;$(</span><span style="font-family: Consolas; font-size: 9pt">'#p'</span><span style="font-family: Consolas; color: black; font-size: 9pt">).progressbar(</span><span style="font-family: Consolas; font-size: 9pt">'setValue'</span><span style="font-family: Consolas; color: black; font-size: 9pt">,&nbsp;value); &nbsp;&nbsp;</span></p>
+        <p style="border-bottom: medium none; text-align: left; border-left: medium none; padding-bottom: 0cm; line-height: 13.5pt; text-indent: -18pt; margin: 0cm 0cm 0pt 18pt; padding-left: 0cm; padding-right: 0cm;background: white; word-break: break-all; border-top: medium none; border-right: medium none; padding-top: 0cm" align="left"><span style="font-family: Consolas; color: #2b91af; font-size: 9pt">5.&nbsp;</span><span style="font-family: Consolas; color: black; font-size: 9pt">}&nbsp;&nbsp;</span></p></div>
+    <h4><span style="font-family: 宋体">特性</span></h4>
+    <table style="margin: auto auto auto 6.75pt; border-collapse: collapse" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">名称</span></strong><strong></strong></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">类型</span></strong><strong></strong></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">说明</span></strong><strong></strong></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">默认值</span></strong><strong></strong></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">width</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">string</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">设置</span><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">progressbar</span><span style="font-family: 宋体; font-size: 9pt">的宽度。</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">auto</span></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">value</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">number</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">百分比值。</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">0</span></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">text</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">string</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">显示在组件上的文字的模板。</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">{value}%</span></p></td></tr></tbody></table>
+    <h4><span style="font-family: 宋体">事件</span></h4>
+    <table style="margin: auto auto auto 6.75pt; border-collapse: collapse" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">名称</span></strong><strong></strong></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">参数</span></strong><strong></strong></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">说明</span></strong><strong></strong></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">onChange</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">newValue,oldValue</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">当值改变的时候触发。</span></p></td></tr></tbody></table>
+    <h4><span style="font-family: 宋体">方法</span></h4>
+    <table style="margin: auto auto auto 6.75pt; border-collapse: collapse" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">名称</span></strong><strong></strong></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">参数</span></strong><strong></strong></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; padding-left: 8.4pt; padding-right: 8.4pt;background: #eeeeee; border-top: #8cacbb 1pt solid; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p align="center"><strong><span style="font-family: 宋体; font-size: 9pt">说明</span></strong><strong></strong></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">options</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">none</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">返回</span><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">options</span><span style="font-family: 宋体; font-size: 9pt">对象。</span></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">resize</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">width</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">调整组件尺寸。</span></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">getValue</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">none</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">返回当前的进度值。</span></p></td></tr>
+        <tr>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #8cacbb 1pt solid; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">setValue</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">value</span></p></td>
+            <td style="border-bottom: #8cacbb 1pt solid; border-left: #d4d0c8; padding-bottom: 3.6pt; background-color: transparent; padding-left: 8.4pt; padding-right: 8.4pt; border-top: #d4d0c8; border-right: #8cacbb 1pt solid; padding-top: 3.6pt">
+                <p><span style="font-family: 宋体; font-size: 9pt">设置一个新的进度值。</span></p></td></tr></tbody></table>
+    <p><span style="font-family: 'Arial','sans-serif'; font-size: 9pt">﻿ <span style="font-family: 'Arial', 'sans-serif'">&nbsp; </span></span></p>
+    <div style="text-align: left; margin: 9pt 0cm 9pt 42pt"><span style="font-family: 宋体; font-size: 10pt"><a style="color: #008000" href="http://www.cnblogs.com/philoo"><span style="font-family: 宋体; font-size: 10pt">风流涕淌</span></a>&nbsp;翻译。不当之处，敬请指正。转载请保留出处！</span></div>
+    <p></p>
+    <h2>Basic ProgressBar</h2>
+    <div class="demo-info">
+        <div class="demo-tip icon-tip"></div>
+        <div>Click the button below to show progress information.</div>
+    </div>
+    <div style="margin:10px 0;">
+        <a href="#" class="easyui-linkbutton" onclick="start()">Start</a>
+    </div>
+    <div id="p" class="easyui-progressbar" style="width:400px;"></div>
+    <script>
+        function start(){
+            var value = $('#p').progressbar('getValue');
+            if (value < 100){
+                value += Math.floor(Math.random() * 10);
+                $('#p').progressbar('setValue', value);
+                setTimeout(arguments.callee, 200);
+            }
+        };
+    </script>
+</div>
+</body>
+</html>

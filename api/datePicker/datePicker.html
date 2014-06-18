@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="padding: 0px 100px 100px 100px ">
+<h1>my97 datePicker使用</h1>
+<h2>html</h2>
+<code>
+    <p>< input type='text' class='Wdate input_text_date'/></p>
+</code>
+<h2>JS</h2>
+<code>
+    <p>var datePicker = require("datePicker");</p>
+    <p>datePicker = new datePicker();</p>
+    <p>datePicker.getMy97DatePicker();</p>
+    <p>/*上面这三行代码是用来模块化加载my97DatePicker插件，项目中只需加载一次。后面要使用my97DatePicker插件只需 直接使用WdatePicker方法就行了。 */</p>
+    <p>WdatePicker({<p>
+    <p>dateFmt : "yyyy-MM-dd HH:mm:ss",<p>
+    <p>minDate : "#F{$dp.$D('createDateStart')}"<p>
+     <p> });</p>
+</code>
+<a href="http://www.my97.net/dp/demo/index.htm">My97DatePicker插件具体使用，参考官方网站。</a>
+</div>
+</body>
+</html>

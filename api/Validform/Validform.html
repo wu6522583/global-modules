@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Validform</title>
+</head>
+<body>
+<div  class="easyui-layout" style="width: 100%;height: 100%">
+<div data-options="region:'north',split:true" style="height:160px;padding:10px">
+    <pre>
+        define(function(require,exports,module){
+            /* 加载 Validform 模块 */
+            var Validform = require("Validform");
+            Validform = new Validform();
+            Validform.getValidform();
+        });
+    </pre>
+</div>
+<div data-options="region:'west',title:'West',split:true" style="width:300px;">
+    <ul id="Validform_Tree"></ul>
+</div>
+<div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+    <div id="Validform_Tabs" class="easyui-tabs" fit="true" border="false">
+    </div>
+</div>
+<script>
+    seajs.use("./Validform/Validform");
+</script>
+</div>
+</body>
+</html>
