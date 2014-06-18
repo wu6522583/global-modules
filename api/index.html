@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>global-modules API</title>
+    <script src="../lib/sea/sea.js"></script>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'west',title:'West',split:true" style="width:300px;">
+    <ul id="t_tree"></ul>
+</div>
+<div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+    <div id="mainTabs" class="easyui-tabs" fit="true" border="false">
+    </div>
+</div>
+</body>
+</html>
+<script>
+seajs.config({
+    base: "../",
+    debug : 2
+});
+seajs.use("base/engine",function(engine){
+    engine.go("./index");
+});
+</script>

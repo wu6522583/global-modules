@@ -7,6 +7,7 @@ define(function(require,exports,module){
         var args = arguments;
         require.async( args[0][eax] ,function(){
             if ( args[0][eax] ) {
+                eax++;
                 args.callee(args[0],args[1]);
             } else {
                 eax = 0;
@@ -14,6 +15,6 @@ define(function(require,exports,module){
                 args[1]();
             }
         });
-        eax++;
+//        eax++;
     }
 });

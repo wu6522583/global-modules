@@ -1,7 +1,5 @@
-
 <html>
 <head>
-
     <meta charset="utf-8">
     <title>jQuery File Upload Demo</title>
     <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bars, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads and client-side image resizing. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
@@ -17,9 +15,6 @@
     </style>
 </head>
 <body>
-<!--<div>-->
-    <!--<script id="myEditor" type="text/plain" style="width:800px;height:500px"></script>-->
-<!--</div>-->
 <!--<form class="registerform" action="ajax_post.php"></form>-->
 <!--<div id="aa" class="easyui-accordion" style="width:300px;height:200px;">-->
     <!--<div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">-->
@@ -86,7 +81,9 @@
 <!--<div id="div2" style="height: 500px;width: 800px;"></div>-->
 <!--<input id="dd" type="text" class="easyui-datebox" required="required">-->
 
-<div style="width: 500px;height: 200px"><form class="dropzone" id="myUpload"></form></div>
+
+
+<form style="width: 50px;height: 20px;background: rgba(0,0,0,0.02);position: relative;overflow: visible;display: inline-block;padding: 0.5em 1em;border: 1px solid #d4d4d4;margin: 0;text-decoration: none;text-shadow: 1px 1px 0 #fff;font: 11px/normal sans-serif;color: #333;white-space: nowrap;cursor: pointer;outline: none;background-color: #ececec;background-image: -moz-linear-gradient(#f4f4f4, #ececec);background-image: -o-linear-gradient(#f4f4f4, #ececec);background-image: linear-gradient(#f4f4f4, #ececec);-webkit-background-clip: padding;-moz-background-clip: padding;-o-background-clip: padding-box;-webkit-border-radius: 0.2em;-moz-border-radius: 0.2em;border-radius: 0.2em;zoom: 1;" id="myUpload">点击上传</form>
 </body>
 </html>
 <script>
@@ -103,86 +100,27 @@
                 $("#myUpload").dropzone({
                     paramName: "file", // The name that will be used to transfer the file
                     maxFilesize: 2, // MB
-                    url:"156",
+                    url:"156.do",
                     method:"post", /* post 或者 get */
                     parallelUploads:1,/*并行上传数*/
-                    addRemoveLinks:true,
-                    clickable:true,
-                    autoProcessQueue:true,
-                    forceFallback:false,
-                    dictFallbackMessage:"你想填写什么呢！",
-                    dictFallbackText:"这里也可以自定义！",
-                    dictFileTooBig:"太大了",
-                    dictResponseError:"返回失败",
-                    dictRemoveFile:"取消上传",
+                    dictDefaultMessage:"上传",
+                    previewTemplate:"<p style='display: none'></p>",
                     accept: function(file, done) {
-                        if (file.name == "justinbieber.jpg") {
-                            done("Naha, you don't.");
-                        }
-                        else {
+                        var type=/^.+(\.jpg|bmp|gif|png)$/;
+                        if(type.test( file.name))
+                        {
                             done();
+                        }
+                        else
+                        {
+                            alert( "不支持上传此类型");
                         }
                     },
                     init: function() {
-                        this.on("addedfile", function(file) { alert("Added file."); });
-                        this.on("drop", function(file) { alert("drop file."); });
-                        this.on("dragstart", function(file) { alert("dragstart file."); });
-                        this.on("dragend", function(file) { alert("dragend file."); });
-                        this.on("dragenter", function(file) { alert("dragenter file."); });
-                        this.on("dragover", function(file) { alert("dragover file."); });
-                        this.on("dragleave", function(file) { alert("dragleave file."); });
-                        this.on("removedfile", function(file) { alert("removedfile file."); });
-                        this.on("thumbnail", function(file) { alert("thumbnail file."); });
-                        this.on("error", function(file) { alert("error file."); });
-                        this.on("processing", function(file) { alert("processing file."); });
-                        this.on("uploadprogress", function(file) { alert("uploadprogress file."); });
-                        this.on("sending", function(file) { alert("sending file."); });
                         this.on("success", function(file) { alert("success file."); });
-                        this.on("complete", function(file) { alert("complete file."); });
-                        this.on("canceled", function(file) { alert("canceled file."); });
-                        this.on("maxfilesreached", function(file) { alert("maxfilesreached file."); });
-                        this.on("maxfilesexceeded", function(file) { alert("maxfilesexceeded file."); });
-                        this.on("processingmultiple", function(file) { alert("processingmultiple file."); });
-                        this.on("sendingmultiple", function(file) { alert("sendingmultiple file."); });
-                        this.on("successmultiple", function(file) { alert("successmultiple file."); });
-                        this.on("completemultiple", function(file) { alert("completemultiple file."); });
-                        this.on("canceledmultiple", function(file) { alert("canceledmultiple file."); });
-                        this.on("totaluploadprogress", function(file) { alert("totaluploadprogress file."); });
-                        this.on("reset", function(file) { alert("reset file."); });
-                        this.on("queuecomplete", function(file) { alert("queuecomplete file."); });
-                        this.on("maxfilesexceeded", function(file) { alert("maxfilesexceeded file."); });
                     }
                 });
-//                var up = new up();
-//                up.baseUpload().done(function(html){
-//                    $("#upupload").append(html);
-//                    seajs.dependentLoad([
-//                        "{globalPath}/upload/JQueryFileUpload/css/bootstrap.min.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/style.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/blueimp-gallery.min.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload.css",
-//                        "{globalPath}/upload/JQueryFileUpload/css/jquery.fileupload-ui.css",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.min.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/vendor/jquery.ui.widget.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/tmpl.min.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/load-image.min.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/canvas-to-blob.min.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/bootstrap.min.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.blueimp-gallery.min.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.iframe-transport.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-process.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-image.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-audio.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-video.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-validate.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/jquery.fileupload-ui.js",
-//                        "{globalPath}/upload/JQueryFileUpload/js/main.js"]);
-//                });
             });
-
-
-
 //            require("native_plugins/wind-master/bin/dev/wind-all-0.7.3");
 //            var a = eval(Wind.compile("async",
 //                    function () {
@@ -268,13 +206,13 @@
                 return def.promise();
             }
             */
-            /*
-            var editor = require("editor");
-            editor = new editor();
-            editor.getUeditor().done(function(){
-                UE.getEditor('myEditor');
-            });
-            */
+
+//            var editor = require("editor");
+//            editor = new editor();
+//            editor.getUeditor().done(function(){
+//                UE.getEditor('myEditor');
+//            });
+
             /*
             require("datebox");
 
